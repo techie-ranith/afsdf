@@ -22,6 +22,8 @@ import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import next from 'next';
+import Recruitwise from '../../../public/recruitwise.png'
+import Image from 'next/image';
 
 const drawerWidth = 240;
 
@@ -130,7 +132,7 @@ const MiniDrawer = (props: MiniDrawerProps) => {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            Recruitwise
+          <Image src={Recruitwise} alt='' width={150}></Image>
           </Typography>
         </Toolbar>
       </AppBar>
@@ -142,7 +144,7 @@ const MiniDrawer = (props: MiniDrawerProps) => {
         </DrawerHeader>
         <Divider />
         <List>
-          {['overview','Hiring', 'Manage', 'discussions', 'Settings'].map((text, index) => (
+          {['Overview','Hiring', 'Manage', 'Discussions', 'Settings'].map((text, index) => (
             <Link href={`/employer/${text.toLowerCase()}`} key={text}>
             <ListItem key={text} disablePadding sx={{ display: 'block' }}>
               <ListItemButton

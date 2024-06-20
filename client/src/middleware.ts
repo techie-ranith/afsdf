@@ -10,4 +10,4 @@ export default withAuth({
     },
 });
 
-export const config = { matcher: ["/employer/overview", "/employer/hiring"] };
+export const config = { matcher: [] };
