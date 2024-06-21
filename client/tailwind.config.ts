@@ -7,6 +7,24 @@ const config: Config = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    heading:{
+      1:'',
+      2:{
+
+      },
+      3:{
+
+      },
+    },
+    text:{
+      1:'text-fonts-primary text-md',
+      2:{
+        
+      },
+      3:{
+
+      }
+    },
     colors: {
       primary: {
         0: '#EAE9FB',
