@@ -25,7 +25,7 @@ const jobCardSecondary = () => {
             <div className='border-2 border-accent-200 rounded-md px-1'>tags</div>
         </div>
       </div>
-      <div className='flex items-center justify-between flex-col h-full'>
+      <div className='flex items-center justify-between flex-col h-full gap-16'>
         <Image src={icon} alt='icon' width={20}></Image>
         <div className=' text-fonts-primary text-xs'>04/05/2024</div>
       </div>
