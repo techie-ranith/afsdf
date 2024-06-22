@@ -5,7 +5,7 @@ import JobDescription from '@/components/layouts/jobDescription'
 const page = () => {
   return (
     <div className='flex justify-center items-start gap-4'>
-      <div className='flex flex-col items-center justify-center gap-4 overflow-y-auto h-[600px]'>
+      <div className='flex flex-col items-center justify-center gap-4 overflow-y-auto h-[600px] p-2 pt-72'>
         <JobCardSecondary />
         <JobCardSecondary />
         <JobCardSecondary />
