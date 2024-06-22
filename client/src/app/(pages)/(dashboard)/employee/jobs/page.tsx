@@ -1,19 +1,12 @@
 import React from 'react'
 import JobCardSecondary from '@/components/layouts/jobCardSecondary'
 import JobDescription from '@/components/layouts/jobDescription'
+import SearchComponent from '@/components/layouts/SearchComponent'
 
 const page = () => {
   return (
     <div className='flex justify-center gap-4'>
-      <div>
-        <JobCardSecondary />
-        <JobCardSecondary />
-        <JobCardSecondary />
-        <JobCardSecondary />
-        <JobCardSecondary />
-
-      </div>
-      <JobDescription />
+      <SearchComponent></SearchComponent>
     </div>
   )
 }
