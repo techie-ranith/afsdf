@@ -1,12 +1,12 @@
 'use client'
 
 import React from 'react'
-import Button from "@/components/Buttons/Buttons"
 import ComboBox from "@/components/ComboBox"
 import TuneIcon from '@mui/icons-material/Tune';
 import DropDown from "@/components/layouts/DropDown"
 import Chip from '@mui/material/Chip';
 import jobTitles from '@/data/jobtitles.js'
+import Button from '@/components/Buttons/Buttons'
 
 
 
@@ -47,20 +47,19 @@ const SearchComponent = () => {
 
   return (
     <div>
-      <div className='flex items-center justify-center'>
-        <ComboBox data={jobTitles}></ComboBox>
-        <ComboBox data={PlaceData}></ComboBox>
-        <TuneIcon/>
+      <div className='flex items-center justify-center gap-4'>
+        <ComboBox data={jobTitles} placeholder='select keywords'></ComboBox>
+        <ComboBox data={PlaceData} placeholder='location'></ComboBox>
         <Button variant="primary" size="medium">Search</Button>
       </div>
-      <div>
-        <div>
+      <div className='flex items-center justify-between'>
+        <div className='flex items-center justify-start'>
           <DropDown title="Job Type" items={JobType} onChange={handleDropdownChange}></DropDown>
           <DropDown title="Modality" items={Modality} onChange={handleDropdownChange}></DropDown>
           <DropDown title="Country" items={Country} onChange={handleDropdownChange}></DropDown>
           <DropDown title="Salary" items={Salary} onChange={handleDropdownChange}></DropDown>
         </div>
-        <div></div>
+        <Button variant={'primary'} size={'medium'}>Clear FIlter</Button>
       </div>
     </div>
   );
