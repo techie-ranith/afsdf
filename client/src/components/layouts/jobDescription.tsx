@@ -6,6 +6,8 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import VerifiedIcon from '@mui/icons-material/Verified';
 import ShareIcon from '@mui/icons-material/Share';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import Button from '@/components/Buttons/Buttons';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
 
 const jobDescription = () => {
   return (
@@ -20,7 +22,7 @@ const jobDescription = () => {
                   <LocationOnIcon fontSize='small'></LocationOnIcon>
                   <div>Katunayake</div>
                 </div>
-            </div>
+            </div>            
             <div className='flex flex-col items-end justify-center gap-2'>
                 <div className='flex items-center justify-center gap-4'>
                     <VerifiedIcon fontSize='small' color='success' />
@@ -32,6 +34,13 @@ const jobDescription = () => {
                     <div>23 applied</div>
                 </div>
             </div>
+        </div>
+        <div className='flex gap-2'>
+          <Button variant={'primary'} size={'medium'}>Apply Now</Button>
+          <Button variant={'primary'} size={'medium'} className='flex gap-2'>
+            Apply via
+            <LinkedInIcon/>
+          </Button>
         </div>
         <div>
             <div className='text-lg font-semibold'>Description</div>
