@@ -9,13 +9,13 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 
 const jobDescription = () => {
   return (
-    <div className='flex flex-col items-center justify-center rounded-lg px-4 border-2 shadow-xl gap-12 w-[600px] overflow-auto h-[800px] relative'>
-      <Image src={banner} alt='banner' className='mt-16'></Image>
+    <div className='flex flex-col items-center justify-center rounded-lg px-2 border-0 shadow-xl gap-12 w-[600px] overflow-auto max-h-[600px] pt-36 relative'>
+      <Image src={banner} alt='banner' className='mt-52 border-0 rounded-md'></Image>
       <Image src={logo} alt='logo' className='border-0 rounded-full absolute top-[125px] left-16' width={60}></Image>
-      <div className='flex flex-col items-start justify-center gap-8'>
+      <div className='flex flex-col items-start justify-center gap-8 px-4'>
         <div className='flex w-full items-center justify-between'>
             <div className='flex flex-col items-start justify-between gap-2'>
-                <div>Job title</div>
+                <div className='font-semibold text-2xl'>Software Developer</div>
                 <div className='flex items-center justify-center gap-2'>
                   <LocationOnIcon fontSize='small'></LocationOnIcon>
                   <div>Katunayake</div>
