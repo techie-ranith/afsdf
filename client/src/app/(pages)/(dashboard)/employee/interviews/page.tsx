@@ -2,6 +2,9 @@
 import React from 'react';
 import DataGrid from '@/components/DataGrids/datagrid';
 import { GridColDef } from '@mui/x-data-grid';
+import Image from 'next/image';
+import meet from "../../../../../../public/meet.png";
+import zoom from '../../../../../../public/zoom.png'
 
 const columns: GridColDef[] = [
   { field: 'id', headerName: 'ID', width: 90 },
@@ -48,19 +51,21 @@ const rows = [
 
 const Hiring = () => {
   return (
-    <div className='flex items-start justify-center gap-4'>
-      <div>
-        meeting scheduling form goes here
+    <div className='flex items-start justify-around p-10 gap-4'>
+      <div className='flex items-center justify-center flex-col'>
+        <div>
+          meeting scheduling form goes here
+        </div>
+        <div className='flex flex-col items-center justify-center gap-8'>
+          <div>Create an instant Meeting.</div>
+          <div className='flex items-center justify-center gap-6'>
+            <Image src={meet} alt='meet icon' className='w-[200px] h-[100px] border-2 rounded-xl shadow-2xl object-cover'></Image>
+            <Image src={zoom} alt='zoom icon' className='w-[200px] h-[100px] border-2 rounded-xl shadow-2xl object-cover'></Image>
+          </div>
+        </div>
       </div>
       <div className='flex flex-col gap-8 items-center justify-center'>
-            <DataGrid rows={rows} columns={columns} gridwidth='60%'/>
-            <div className='flex flex-col items-center justify-center gap-8'>
-              <div>Create an instant Meeting.</div>
-              <div className='flex items-center justify-center gap-6'>
-                <div className='w-[200px] h-[100px] border-2 rounded-xl shadow-xl'></div>
-                <div className='w-[200px] h-[100px] border-2 rounded-xl shadow-xl'></div>
-              </div>
-            </div>
+            <DataGrid rows={rows} columns={columns} gridwidth='100%'/>
       </div>
     </div>
   );
