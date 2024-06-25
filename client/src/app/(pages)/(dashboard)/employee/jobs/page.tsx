@@ -7,6 +7,7 @@ const page = () => {
   return (
     <div className='flex justify-center gap-4'>
       <SearchComponent></SearchComponent>
+    <div className='flex flex-col justify-center gap-4'>
       <div>
         <JobCardSecondary />
         <JobCardSecondary />
@@ -15,6 +16,7 @@ const page = () => {
         <JobCardSecondary />
       </div>
       <JobDescription />
+    </div>
     </div>
   )
 }
