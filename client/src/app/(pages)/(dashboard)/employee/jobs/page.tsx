@@ -11,7 +11,6 @@ const page = () => {
         <JobCardSecondary />
         <JobCardSecondary />
         <JobCardSecondary />
-
       </div>
       <JobDescription />
     </div>
