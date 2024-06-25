@@ -1,7 +1,7 @@
 'use client'
 import * as React from 'react';
-import Link from 'next/link'
 import { ReactNode } from 'react';
+import Link from 'next/link'
 import { styled, useTheme, Theme, CSSObject } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
@@ -132,7 +132,7 @@ const MiniDrawer = (props: MiniDrawerProps) => {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            <Image src={Recruitwise} alt='' width={200}></Image>
+          <Image src={Recruitwise} alt='' width={150}></Image>
           </Typography>
         </Toolbar>
       </AppBar>
@@ -144,8 +144,8 @@ const MiniDrawer = (props: MiniDrawerProps) => {
         </DrawerHeader>
         <Divider />
         <List>
-          {['overview','jobs', 'hiring', 'discussions', 'Settings'].map((text, index) => (
-            <Link href={`/employee/${text.toLowerCase()}`} key={text}>
+          {['Overview','Hiring', 'Manage', 'Discussions', 'Settings'].map((text, index) => (
+            <Link href={`/employer/${text.toLowerCase()}`} key={text}>
             <ListItem key={text} disablePadding sx={{ display: 'block' }}>
               <ListItemButton
                 sx={{
