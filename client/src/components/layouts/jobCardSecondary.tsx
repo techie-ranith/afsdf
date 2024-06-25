@@ -7,7 +7,7 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 
 const jobCardSecondary = () => {
   return (
-    <div className='flex items-center justify-between border-0 rounded-md shadow-2xl gap-4 w-[500px] p-4'>
+    <div className='flex items-center justify-between border-0 rounded-md shadow-2xl gap-4 w-[500px] p-4 m-4'>
       <div className='flex flex-col items-center justify-center gap-2'>
         <Image src={logo} alt='logo' width={50} height={50} className='border-0 rounded-md'></Image>
         <div>text</div>
