@@ -1,8 +1,7 @@
 'use client'
-
 import * as React from 'react';
-import Link from 'next/link'
 import { ReactNode } from 'react';
+import Link from 'next/link'
 import { styled, useTheme, Theme, CSSObject } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
@@ -22,6 +21,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
+import next from 'next';
 import Recruitwise from '../../../public/recruitwise.png'
 import Image from 'next/image';
 
@@ -100,7 +100,9 @@ interface MiniDrawerProps {
   children: ReactNode; // Assuming children will be passed as ReactNode
 }
 
-const MiniDrawer: React.FC<MiniDrawerProps> = ({ children }) => {
+// Change the final export to an arrow function
+const MiniDrawer = (props: MiniDrawerProps) => {
+  
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -130,7 +132,7 @@ const MiniDrawer: React.FC<MiniDrawerProps> = ({ children }) => {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            <Image src={Recruitwise} alt='' width={200} height={60} />
+          <Image src={Recruitwise} alt='' width={150}></Image>
           </Typography>
         </Toolbar>
       </AppBar>
@@ -142,35 +144,35 @@ const MiniDrawer: React.FC<MiniDrawerProps> = ({ children }) => {
         </DrawerHeader>
         <Divider />
         <List>
-          {['overview', 'jobs', 'hiring', 'discussions', 'settings'].map((text, index) => (
-            <Link href={`/employee/${text.toLowerCase()}`} key={text} passHref>
-              <ListItem disablePadding sx={{ display: 'block' }}>
-                <ListItemButton
+          {['Overview','Hiring', 'Manage', 'Discussions', 'Settings'].map((text, index) => (
+            <Link href={`/employer/${text.toLowerCase()}`} key={text}>
+            <ListItem key={text} disablePadding sx={{ display: 'block' }}>
+              <ListItemButton
+                sx={{
+                  minHeight: 48,
+                  justifyContent: open ? 'initial' : 'center',
+                  px: 2.5,
+                }}
+              >
+                <ListItemIcon
                   sx={{
-                    minHeight: 48,
-                    justifyContent: open ? 'initial' : 'center',
-                    px: 2.5,
+                    minWidth: 0,
+                    mr: open ? 3 : 'auto',
+                    justifyContent: 'center',
                   }}
                 >
-                  <ListItemIcon
-                    sx={{
-                      minWidth: 0,
-                      mr: open ? 3 : 'auto',
-                      justifyContent: 'center',
-                    }}
-                  >
-                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                  </ListItemIcon>
-                  <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
-                </ListItemButton>
-              </ListItem>
+                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                </ListItemIcon>
+                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
+              </ListItemButton>
+            </ListItem>
             </Link>
           ))}
         </List>
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
-        {children}
+          {props.children}
       </Box>
     </Box>
   );
