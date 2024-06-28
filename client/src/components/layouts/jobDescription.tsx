@@ -7,7 +7,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import Button from '@/components/Buttons/Buttons';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 
-  interface JobDescriptionProps {
+export interface JobDescriptionProps {
     jobTitle: string;
     logo: StaticImageData;
     banner: StaticImageData;

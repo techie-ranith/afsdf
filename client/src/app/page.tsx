@@ -1,11 +1,26 @@
 import React from 'react'
+import Navbar from "@/components/layouts/LandingPage/Navbar";
+import Hero from "@/components/layouts/Hero";
+import JobCardSection from '@/components/layouts/LandingPage/JobCardSection';
+import Features from '@/components/layouts/LandingPage/Features';
+import Testimonials from '@/components/layouts/LandingPage/Testimonials';
+import QandA from '@/components/layouts/LandingPage/QandA';
+import Footer from '@/components/layouts/Footer';
+import Container from '@/components/layouts/Container';
 
 const page = () => {
   return (
-    <div className='flex items-center justify-center'>
-      <div>div 1</div>
-      <div>div 2</div>
-    </div>
+    <Container>
+      <div className='flex flex-col items-center justify-center border-2 min-w-full'>
+        <Navbar></Navbar>
+        <Hero></Hero>
+        <JobCardSection></JobCardSection>
+        <Features></Features>
+        <Testimonials></Testimonials>
+        <QandA></QandA>
+        <Footer></Footer>
+      </div>
+    </Container>
   )
 }
 
