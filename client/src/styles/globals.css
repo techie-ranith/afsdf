@@ -16,3 +16,15 @@ ul {
     list-style: disc inside;
   }
   
+  .font-space-mono {
+    font-family: 'Space Mono', monospace;
+    font-size: 14px; /* Adjust this value as needed */
+    color: #333; /* Adjust the color as needed */
+    line-height: 1.5;
+    text-align: center; /* Optional: center-align the text */
+    margin-top: 16px; /* Optional: add some space at the top */
+  }
+  .dashed-line {
+    border-top: 1px dashed #ccc;
+    margin: 10px 0;
+  }
