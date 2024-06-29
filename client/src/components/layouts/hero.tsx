@@ -17,9 +17,62 @@ const Hero = () => {
   const [showSignIn, setShowSignIn] = React.useState(true);
   const [showForgetPassword, setShowForgetPassword] = React.useState(false);
   const [name, setName] = React.useState('');
-
+  const [verificationCode, setverificationCode] = React.useState('');
   const [conPassword, setConPassword] = React.useState('');
   const router = useRouter();
+  const [showPassword, setShowPassword] = React.useState(false);
+
+  const handleToggleShowPassword = () => {
+    setShowPassword((prevShowPassword) => !prevShowPassword);
+  };
+
+  const haddleforgot = async (e:any) => {
+    e.preventDefault();
+    try {
+      const response = await fetch('/api/forgot', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await response.json();
+      
+    } catch (error) {
+      console.log('Error sending email');
+     
+    }
+  };
+
+  const haddlecode = async (e:any) =>
+    {
+      e.preventDefault();
+      if(password !== conPassword){
+        alert('passwords do not match');
+        return;
+      };
+
+      try {
+        const response = await fetch('/api/reset', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ email,verificationCode, password }),
+        });
+    
+        const data = await response.json();
+        console.log(data);
+      } catch (error) {
+        console.log('Error resetting password');
+      }
+
+    }
+
+
+
+
 
   const haddlesignup = async (e:any) => {
     e.preventDefault();
@@ -179,7 +232,7 @@ const Hero = () => {
                           borderColor: 'black',
                           border: '2px solid black',
                         }}
-                        type='password'
+                        type={showPassword ? 'text' : 'password'}
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         required
@@ -331,10 +384,151 @@ const Hero = () => {
               )}
             </div>
           ) : (
-            <span className='text-[#2421C4]' onClick={handleForgetPassword}>
-              Forgot Password?
-            </span>
+            <div>
+                <form onSubmit={haddlecode}>
+                   <FormControl>
+                   <FormLabel sx={{ fontWeight: 'bold' }}>Enter the Email</FormLabel>
+                   <div className='flex gap-4'>
+                      <Input
+                        placeholder="abc@gmail.com"
+                        sx={{
+                          width: '350px',
+                          borderRadius: '30px',
+                          height: '42px',
+                          borderColor: 'black',
+                          border: '2px solid black',
+                        }}
+                        type='email'
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                      />
+                       <Button
+                      sx={{
+                        backgroundColor: '#2421C4',
+                        color: 'white',
+                        borderRadius: '15px',
+                        width: '103px',
+                        height: '43px',
+                        '&:hover': {
+                          borderColor: 'blue',
+                          color: 'white',
+                          backgroundColor: '#303f9f',
+                        },
+                        fontSize: '10px',
+                        fontWeight: 'bold',
+                      }}
+                     
+                      onClick={haddleforgot}
+                    >
+                      Send the Code
+                    </Button >
+                    </div>
+                   
+                     
+
+                      
+                    <FormLabel sx={{ fontWeight: 'bold' }}>Enter the code</FormLabel>
+                    <Input
+                        placeholder="3092"
+                        sx={{
+                          width: '350px',
+                          borderRadius: '30px',
+                          height: '42px',
+                          borderColor: 'black',
+                          border: '2px solid black',
+                        }}
+                        type='text'
+                        value={verificationCode}
+                        onChange={(e) => setverificationCode(e.target.value)}
+                        required
+                      />
+                      <FormLabel sx={{ fontWeight: 'bold' }}>Password</FormLabel>
+                      <Input
+                        placeholder="xxxxxxxxxxxxxxxxx"
+                        sx={{
+                          width: '470px',
+                          borderRadius: '30px',
+                          height: '42px',
+                          borderColor: 'black',
+                          border: '2px solid black',
+                        }}
+                        type='password'
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                      />
+                     <FormLabel sx={{ fontWeight: 'bold' }}>Confirm Password</FormLabel>
+                      <Input
+                        placeholder="xxxxxxxxxxxxxxxxx"
+                        sx={{
+                          width: '470px',
+                          borderRadius: '30px',
+                          height: '42px',
+                          borderColor: 'black',
+                          border: '2px solid black',
+                        }}
+                        type='password'
+                        value={conPassword}
+                        onChange={(e) => setConPassword(e.target.value)}
+                        required
+                      />
+
+                        <div className='flex flex-col'>
+                        <span className='text-[#2421C4]' onClick={handleForgetPassword}>
+                        Alredy have account?
+                      </span>
+                       <Button
+                      sx={{
+                        backgroundColor: '#2421C4',
+                        color: 'white',
+                        borderRadius: '15px',
+                        width: '157px',
+                        height: '53px',
+                        '&:hover': {
+                          borderColor: 'blue',
+                          color: 'white',
+                          backgroundColor: '#303f9f',
+                        },
+                        fontSize: '12px',
+                        fontWeight: 'bold',
+                      }}
+                      type="submit"
+                    >
+                      Change Password
+                    </Button>
+                    
+                      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+                   </FormControl>
+
+
+
+                </form>
+
+
+
+
+
+
+
+                </div>
+
+            
           )}
+
+
         </div>
       </div>
       <div>
