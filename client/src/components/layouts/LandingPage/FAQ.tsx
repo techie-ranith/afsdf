@@ -24,6 +24,15 @@ const QandA = () => {
           </div>
           <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</div>
         </div>
+        {[...Array(5)].map((_, index) => (
+          <div key={index} className='flex items-center justify-center flex-col'>
+            <div className='flex items-center justify-between w-full'>
+              <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+              <AddCircleOutlineIcon></AddCircleOutlineIcon>
+            </div>
+            <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</div>
+          </div>
+        ))}
       </div>
     </div>
   )
