@@ -7,6 +7,24 @@ const config: Config = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    heading:{
+      1:'',
+      2:{
+
+      },
+      3:{
+
+      },
+    },
+    text:{
+      1:'text-fonts-primary text-md',
+      2:{
+        
+      },
+      3:{
+
+      }
+    },
     colors: {
       primary: {
         0: '#EAE9FB',
@@ -36,7 +54,9 @@ const config: Config = {
         primary:'#606060',
         secondary:'#EBE2E2',
 
-      }
+      },
+      white:'#FFFFFF',
+      black:'#000000',
     },
     extend: {
       backgroundImage: {
