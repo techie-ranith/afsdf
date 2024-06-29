@@ -17,6 +17,7 @@ const userSchema = new Schema(
       type: String,
       required: false,
     },
+    verificationCodeExpires: { type: Date, expires: 0, default: Date.now },
   },
   { timestamps: true }
 );
