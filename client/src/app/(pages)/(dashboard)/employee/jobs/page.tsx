@@ -50,7 +50,7 @@ const Page: React.FC = () => {
             />
           </div>
           <div>
-            <JobDescription ></JobDescription>
+            <JobDescription />
           </div>
         </div>
       </div>
