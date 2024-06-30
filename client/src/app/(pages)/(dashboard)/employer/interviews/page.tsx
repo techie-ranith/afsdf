@@ -85,7 +85,7 @@ const Hiring = () => {
         </div>
       </div>
       <div className='flex flex-col gap-8 items-center justify-center'>
-            <DataGrid rows={rows} columns={columns} gridwidth='100%'/>
+            <DataGrid rows={rows} columns={columns} gridwidth='100%' pageSize={10}/>
       </div>
     </div>
   );
