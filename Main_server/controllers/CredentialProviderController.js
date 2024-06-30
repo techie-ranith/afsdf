@@ -1,12 +1,12 @@
-const OrganizationModel = require('../Models/OrganizationModel');
+const credentialProviderModel = require('../Models/CredentialProviderModel');
 const BaseController = require('./BaseController');
 
-class OrganizationController extends BaseController {
+class credentialProviderController extends BaseController {
     constructor() {
-        super(OrganizationModel);
+        super(credentialProviderModel);
     }
 
-    async getSingleOrganization(req, res) {
+    async getSinglecredentialProvider(req, res) {
         try {
             const id = req.params.id;
             if (!this.validateId(id, res)) {
@@ -19,11 +19,11 @@ class OrganizationController extends BaseController {
         }
     }
 
-    async getAllOrganizations(req, res) {
+    async getAllcredentialProviders(req, res) {
         await this.getAllItems(req, res);
     }
 
-    async createNewOrganization(req, res) {
+    async createNewcredentialProvider(req, res) {
         try {
             const data = req.body;
             const organization = await this.createNewItem(data, res);
@@ -33,7 +33,7 @@ class OrganizationController extends BaseController {
         }
     }
 
-    async updateOrganization(req, res) {
+    async updatecredentialProvider(req, res) {
         try {
             const id = req.params.id;
             if (!this.validateId(id, res)) {
@@ -47,7 +47,7 @@ class OrganizationController extends BaseController {
         }
     }
 
-    async deleteSingleOrganization(req, res) {
+    async deleteSinglecredentialProvider(req, res) {
         try {
             const id = req.params.id;
             if (!this.validateId(id, res)) {
@@ -60,7 +60,7 @@ class OrganizationController extends BaseController {
         }
     }
 
-    async deleteAllOrganizations(req, res) {
+    async deleteAllcredentialProviders(req, res) {
         try {
             const result = await this.deleteAllItems(req, res);
             res.status(200).json({ message: `${result.deletedCount} organizations deleted` });
@@ -70,4 +70,4 @@ class OrganizationController extends BaseController {
     }
 }
 
-module.exports = new OrganizationController();
+module.exports = new credentialProviderController();

@@ -1,24 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const {getSingleJob, getAllJobs, createNewJob, updatedJob, deleteSingleJob, deleteAllJobs} = require('../controllers/JobControllers');
+const JobController = require('../controllers/JobControllers');
 
-//get a single Job
-router.get('/:id', getSingleJob);
-
-// get all Jobs
-router.get('/', getAllJobs);
-
-//post a new Job
-router.post('/', createNewJob);
-
-//update a Job
-router.patch('/:id', updatedJob);
-
-//delete a Job
-router.delete('/:id', deleteSingleJob);
-
-// delete all Jobs
-router.delete('/',deleteAllJobs);
-
+router.get('/:id', (req, res) => JobController.getSingleJob(req, res));
+router.get('', (req, res) => JobController.getAllJobs(req, res));
+router.post('', (req, res) => JobController.createNewJob(req, res));
+router.put('/:id', (req, res) => JobController.updateJob(req, res));
+router.delete('/:id', (req, res) => JobController.deleteSingleJob(req, res));
+router.delete('', (req, res) => JobController.deleteAllJobs(req, res));
 
 module.exports = router;

@@ -1,12 +1,12 @@
-const JobModel = require('../Models/Job');
+const MeetingModel = require('../Models/MeetingModel');
 const BaseController = require('./BaseController');
 
-class JobController extends BaseController {
+class MeetingController extends BaseController {
     constructor() {
-        super(JobModel);
+        super(MeetingModel);
     }
 
-    async getSingleJob(req, res) {
+    async getSingleMeeting(req, res) {
         const id = req.params.id;
         if (!this.validateId(id, res)) {
             return;
@@ -14,16 +14,16 @@ class JobController extends BaseController {
         await this.getSingleItem(id, res);
     }
 
-    async getAllJobs(req, res) {
+    async getAllMeetings(req, res) {
         await this.getAllItems(req, res);
     }
 
-    async createNewJob(req, res) {
+    async createNewMeeting(req, res) {
         const data = req.body;
         await this.createNewItem(data, res);
     }
 
-    async updateJob(req, res) {
+    async updateMeeting(req, res) {
         const id = req.params.id;
         if (!this.validateId(id, res)) {
             return;
@@ -32,7 +32,7 @@ class JobController extends BaseController {
         await this.updateExistingItem(id, data, res);
     }
 
-    async deleteSingleJob(req, res) {
+    async deleteSingleMeeting(req, res) {
         const id = req.params.id;
         if (!this.validateId(id, res)) {
             return;
@@ -40,9 +40,9 @@ class JobController extends BaseController {
         await this.deleteSingleItem(id, res);
     }
 
-    async deleteAllJobs(req, res) {
+    async deleteAllMeetings(req, res) {
         await this.deleteAllItems(req, res);
     }
 }
 
-module.exports = new JobController();
+module.exports = new MeetingController();

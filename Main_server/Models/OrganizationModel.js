@@ -5,6 +5,7 @@ const organizationSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    
     orgType: {
         type: String,
         enum: ['Corporation', 'Non-Profit', 'Government Agency'] // Assuming these are the only types
