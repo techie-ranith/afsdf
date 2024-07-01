@@ -97,7 +97,7 @@ const Hero = () => {
           setEmail('');
           setPassword('');
           setConPassword('');
-          router.push('/employer/hiring');
+          router.push('/employer/hiring/jobs');
           
           
          
@@ -139,7 +139,7 @@ const Hero = () => {
       const data = await res.json();
 
       if (res.ok) {
-        router.push('/employer/overview');
+        router.push('/employee/overview');
         console.log('Post job is true');
       }
     } catch (error) {
