@@ -1,7 +1,7 @@
 import React from 'react'
-import SearchComponent from '@/components/layouts/SearchComponent'
-import PrimaryJobCard from '@/components/layouts/JobCardPrimary'
-import Pagination from '@/components/pagination'
+import SearchComponent from '@/components/layouts/cards/SearchComponent'
+import PrimaryJobCard from '@/components/layouts/cards/JobCardPrimary'
+import Pagination from '@/components/layouts/other/pagination'
 
 const JobCardSection = () => {
   return (

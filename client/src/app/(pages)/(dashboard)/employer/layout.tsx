@@ -1,9 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import Drawer from "@/components/layouts/drawer-employer"
-import { ThemeProvider } from '@mui/material/styles';
-import ColorTheme from "@/styles/ColorTheme";
-import { SessionProvider } from "next-auth/react"
+import Drawer from "@/components/layouts/dashbord/drawer-employer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,14 +14,14 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ThemeProvider theme={ColorTheme}>
-          <Drawer>
-            {children}
-          </Drawer>
-        </ThemeProvider>
+ 
+        <Drawer>
+        {children}
+        </Drawer>
       </body>
     </html>
   );

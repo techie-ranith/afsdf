@@ -1,7 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
 
-import logo from '../../../public/logo.png'
+import logo from '../../../../public/logo.png'
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import FacebookIcon from '@mui/icons-material/Facebook';

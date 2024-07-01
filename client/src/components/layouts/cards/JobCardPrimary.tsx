@@ -1,9 +1,9 @@
 import Image from 'next/image'
 import React from 'react'
-import logo from '../../../public/logo.png'
-import save from "../../../public/save.png";
+import logo from '../../../../public/logo.png'
+import save from "../../../../public/save.png";
 import saved from "../../../public/saved.png";
-import Button from '../Buttons/Buttons';
+import Button from '../../Buttons/Buttons';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 
 const JobCard = () => {

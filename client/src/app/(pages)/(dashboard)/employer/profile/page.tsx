@@ -1,11 +1,13 @@
 import React from 'react'
 
-const Canban = () => {
+function page() {
   return (
     <div>
+        profile
       
     </div>
   )
 }
 
-export default Canban
+export default page
+

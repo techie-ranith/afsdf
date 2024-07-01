@@ -1,10 +1,10 @@
 "use client";
 import Image from 'next/image';
 import React from 'react';
-import HeroImage from "../../../public/HeroImage.png";
+import HeroImage from "../../../../public/HeroImage.png";
 import Button from '@mui/material/Button';
-import "../../styles/globals.css";
-import GoogleIcon from '../Icons/GoogleIcon';
+import "../../../styles/globals.css";
+import GoogleIcon from '@/components/Icons/GoogleIcon';
 import FormControl from '@mui/joy/FormControl';
 import FormLabel from '@mui/joy/FormLabel';
 import Input from '@mui/joy/Input';
