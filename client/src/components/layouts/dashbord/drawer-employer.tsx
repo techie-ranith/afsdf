@@ -15,7 +15,7 @@ import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import Sidebar from './Sidebar-employer';
-import AppBar from './appbar';
+
 
 const drawerWidth = 240;
 
@@ -88,7 +88,7 @@ const MiniDrawer = (props: MiniDrawerProps) => {
     
     <Box sx={{ display: 'flex' }}>
        
-    <AppBar/>
+    
      <Sidebar/>
       <Box component="main" sx={{ flexGrow: 1, bgcolor: 'background.default', p: 3 }}>
         <DrawerHeader >

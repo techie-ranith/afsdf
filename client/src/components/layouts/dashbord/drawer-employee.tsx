@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { styled, useTheme, Theme, CSSObject } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
-import AppBar from './appbar';
+
 import List from '@mui/material/List';
 
 import ListItem from '@mui/material/ListItem';
@@ -84,7 +84,7 @@ const MiniDrawer = (props: MiniDrawerProps) => {
 
   return (
     <Box sx={{ display: 'flex' }}> 
-      <AppBar/>
+      
      <Sidebar/>
       <Box component="main" sx={{ flexGrow: 1, bgcolor: 'background.default', p: 3 }}>
         <DrawerHeader />
