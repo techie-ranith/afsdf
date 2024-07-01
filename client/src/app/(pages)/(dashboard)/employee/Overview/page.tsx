@@ -1,6 +1,6 @@
 'use client'
 import React from 'react'
-import Calander from '@/components/Calander'
+import Calander from '@/components/layouts/other/Calander'
 import { GridColDef } from '@mui/x-data-grid';
 import DataGrid from '@/components/DataGrids/datagrid'
 import LineChart from '@/components/charts/linechart'

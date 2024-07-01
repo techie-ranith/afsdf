@@ -50,7 +50,6 @@ const Hiring = () => {
   return (
     <div>
       <DataGrid rows={rows} columns={columns} gridwidth='60%'/>
-      <iframe src="https://us04web.zoom.us/j/78042661105?pwd=SrHz8jOvo5txCySW84dbtB952Ds82X.1" allow="camera; microphone; display-capture" width={"400px"} height={"400px"}></iframe>
     </div>
   );
 }

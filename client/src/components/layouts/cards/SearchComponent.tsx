@@ -1,8 +1,8 @@
 'use client'
 
 import React from 'react'
-import ComboBox from "@/components/ComboBox"
-import DropDown from "@/components/layouts/DropDown"
+import ComboBox from "@/components/layouts/other/ComboBox"
+import DropDown from "@/components/layouts/cards/DropDown"
 import jobTitles from '@/data/jobtitles.js'
 import Button from '@/components/Buttons/Buttons'
 import location from '@/data/location'

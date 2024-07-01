@@ -1,6 +1,6 @@
 import React from 'react'
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
-import Container from '../Container';
+import Container from './Container';
 
 const QandA = () => {
   return (
