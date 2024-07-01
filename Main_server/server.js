@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const JobRoutes = require('./routes/JobRoutes');
 const OrganizationRoutes = require("./routes/OrganizationRoutes")
-const meeitngs = require('./routes/MeetingRoutes')
+const MeeitngRoutes = require('./routes/MeetingRoutes')
 
 dotenv.config();
 const app = express();
@@ -15,7 +15,7 @@ app.use(express.json());
 // Routes
 app.use('/api/jobs', JobRoutes);
 app.use('/api/organization',OrganizationRoutes);
-app.use('/api/meetings',)
+app.use('/api/meetings', MeeitngRoutes);
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI)
