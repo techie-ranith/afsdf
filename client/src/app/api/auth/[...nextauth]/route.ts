@@ -39,11 +39,11 @@ export const authOptions: any = {
             await newUser.save();
 
             
-            return ('/employer/overview');
+            return ('/employer/hiring/jobs');
             
           }
          
-          return ('/employer/overview');
+          return ('/employer/hiring/jobs');
 
 
         } catch (err) {
