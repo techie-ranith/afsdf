@@ -5,7 +5,7 @@ const page = () => {
   return (
     <div>
       <UpcommingFeature></UpcommingFeature>
-      anaytics
+      discussinons
     </div>
   )
 }

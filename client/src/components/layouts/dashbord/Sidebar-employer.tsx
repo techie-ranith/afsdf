@@ -10,7 +10,8 @@ import IconButton from '@mui/joy/IconButton';
 import Input from '@mui/joy/Input';
 import LinearProgress from '@mui/joy/LinearProgress';
 import List from '@mui/joy/List';
-// import ListItem from '@mui/joy/ListItem';
+import { useRouter } from 'next/navigation';
+import ListItems from '@mui/joy/ListItem';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton, { listItemButtonClasses } from '@mui/joy/ListItemButton';
 import ListItemContent from '@mui/joy/ListItemContent';
@@ -30,14 +31,13 @@ import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
 import BrightnessAutoRoundedIcon from '@mui/icons-material/BrightnessAutoRounded';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-// import { ListItemIcon, ListItemText } from '@mui/material';
 import Link from 'next/link';
 import MailIcon from '@mui/icons-material/Mail';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-
+import AttributionRoundedIcon from '@mui/icons-material/AttributionRounded';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
-
+import { AppBar } from '@mui/material';
 
 
 
@@ -74,6 +74,14 @@ function Toggler({
 }
 
 export default function Sidebar() {
+
+  const router = useRouter();
+
+  const handleLogoutClick = () => {
+    // Redirect to the main page
+    router.push('/');
+  };
+
   return (
     <Sheet
       className="Sidebar"
@@ -87,7 +95,7 @@ export default function Sidebar() {
         zIndex: 10000,
         height: '100dvh',
         width: 'var(--Sidebar-width)',
-        top: 0,
+        top: 22,
         p: 2,
         flexShrink: 0,
         display: 'flex',
@@ -139,41 +147,52 @@ export default function Sidebar() {
           }}
         >
 
-          {['hiring','interviews','manage','overview'].map((text, index) => (
-            <Link href={`/employee/${text}`} key={text}>
+
+
+
+         <ListItems nested>
+            <Toggler
+              renderToggle={({ open, setOpen }) => (
+                <ListItemButton onClick={() => setOpen(!open)}>
+                  <AssignmentRoundedIcon />
+                  <ListItemContent>
+                    <Typography level="title-sm">Hiring</Typography>
+                  </ListItemContent>
+                  <KeyboardArrowDownIcon
+                    sx={{ transform: open ? 'rotate(180deg)' : 'none' }}
+                  />
+                </ListItemButton>
+              )}
+            >
+              <List sx={{ gap: 0.5 }}>
+
+              {['Jobs','Candidates'].map((text, index) => (
+            <Link href={`/employer/hiring/${text.toLowerCase()}`} key={text}>
            
-           {/* <ListItem key={text} disablePadding sx={{ display: 'block' }}>
+  
+          
+           <ListItem key={text} disablePadding sx={{ display: 'block',pl:'40px' }}>
 
+            <ListItemText primary={text}  />
+               
+             
+           </ListItem> 
 
-<ListItemButton
-  sx={{
-    minHeight: 48,
-    
-    px: 2.5,
-  }}
->
-  <ListItemIcon
-    sx={{
-      minWidth: 0,
+         
+          
+
       
-      justifyContent: 'center',
-    }}
-  >
+           </Link>
+           ))}
+           
+              </List>
+            </Toggler>
+          </ListItems>
 
-    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-
-
-  </ListItemIcon>
-  <ListItemText primary={text}  />
-
-
-
-</ListItemButton>
-</ListItem>
- */}
-
-
-
+          {['Headhunting','Interviews','Manage','Profile'].map((text, index) => (
+            <Link href={`/employer/${text.toLowerCase()}`} key={text}>
+           
+  
           
            <ListItem key={text} disablePadding sx={{ display: 'block' }}>
             <ListItemButton>
@@ -186,7 +205,7 @@ export default function Sidebar() {
                      }}
                    >
                  
-                     {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                     {index % 2 === 0 ? <AttributionRoundedIcon /> : <MailIcon />}
                  
                  
                    </ListItemIcon>              
@@ -199,92 +218,22 @@ export default function Sidebar() {
          
           
 
-          {/* <ListItem nested>
-            <Toggler
-              renderToggle={({ open, setOpen }) => (
-                <ListItemButton onClick={() => setOpen(!open)}>
-                  <AssignmentRoundedIcon />
-                  <ListItemContent>
-                    <Typography level="title-sm">Tasks</Typography>
-                  </ListItemContent>
-                  <KeyboardArrowDownIcon
-                    sx={{ transform: open ? 'rotate(180deg)' : 'none' }}
-                  />
-                </ListItemButton>
-              )}
-            >
-
-              <List sx={{ gap: 0.5 }}>
-                <ListItem sx={{ mt: 0.5 }}>
-                  <ListItemButton>All tasks</ListItemButton>
-                </ListItem>
-                <ListItem>
-                  <ListItemButton>Backlog</ListItemButton>
-                </ListItem>
-                <ListItem>
-                  <ListItemButton>In progress</ListItemButton>
-                </ListItem>
-                <ListItem>
-                  <ListItemButton>Done</ListItemButton>
-                </ListItem>
-              </List>
-            </Toggler>
-          </ListItem> */}
-
-
-
-          
-
-
-{/* dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd */}
-          {/* <ListItem nested>
-
-            <Toggler
-              renderToggle={({ open, setOpen }) => (
-                <ListItemButton onClick={() => setOpen(!open)}>
-                  <GroupRoundedIcon />
-                  <ListItemContent>
-                    <Typography level="title-sm">Users</Typography>
-                  </ListItemContent>
-                  <KeyboardArrowDownIcon
-                    sx={{ transform: open ? 'rotate(180deg)' : 'none' }}
-                  />
-                </ListItemButton>
-              )}
-            >
-              
-              <List sx={{ gap: 0.5 }}>
-                <ListItem sx={{ mt: 0.5 }}>
-                  <ListItemButton
-                    role="menuitem"
-                    component="a"
-                    href="/joy-ui/getting-started/templates/profile-dashboard/"
-                  >
-                    My profile
-                  </ListItemButton>
-                </ListItem>
-                <ListItem>
-                  <ListItemButton>Create a new user</ListItemButton>
-                </ListItem>
-                <ListItem>
-                  <ListItemButton>Roles & permission</ListItemButton>
-                </ListItem>
-              </List>
-            </Toggler>
-              </ListItem> */}
-              {/* dddddddddddddddddddddddddddddddddddddddddddddddddddddddd */}
-
-             
+      
             </Link>
           ))}
+
+
+
+
+
+
+
+
         </List>
 
 
 
 
-
-
- {/* feswkfjdjjjjjjjjjjjjjjjjjjjjjjjjjjjj */}
         <List
           size="sm"
           sx={{
@@ -295,23 +244,35 @@ export default function Sidebar() {
             mb: 2,
           }}
         >
-          <ListItem>
-            <ListItemButton>
-              <SupportRoundedIcon />
-              Support
-            </ListItemButton>
-          </ListItem>
 
-          <ListItem>
-            <ListItemButton>
-              <SettingsRoundedIcon />
-              Settings
-            </ListItemButton>
-          </ListItem>
+      {['Settings','Support'].map((text, index) => (
+            <Link href={`/employer/${text.toLowerCase()}`} key={text}>
+          
+           <ListItem key={text} disablePadding sx={{ display: 'block' }}>
+          
 
+           <ListItemButton>
+
+         <ListItemIcon
+         sx={{
+           minWidth: 0,
+           
+           justifyContent: 'center',
+         }}
+       >
+     
+         {index % 2 === 0 ?  <SettingsRoundedIcon /> :  <SupportRoundedIcon />}
+     
+     
+       </ListItemIcon>              
+     <ListItemText primary={text}  />
+
+
+    </ListItemButton>
+          </ListItem>
+          </Link>
+          ))}
         </List>
-
- {/* feswkfjdjjjjjjjjjjjjjjjjjjjjjjjjjjjj */}
 
 
         
@@ -334,9 +295,9 @@ export default function Sidebar() {
           <Typography level="title-sm">Siriwat K.</Typography>
           <Typography level="body-xs">siriwatk@test.com</Typography>
         </Box>
-        <IconButton size="sm" variant="plain" color="neutral">
-          <LogoutRoundedIcon />
-        </IconButton>
+        <IconButton variant="plain" color="neutral" onClick={handleLogoutClick}>
+      <LogoutRoundedIcon />
+    </IconButton>
       </Box>
 
 

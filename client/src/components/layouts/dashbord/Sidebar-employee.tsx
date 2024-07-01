@@ -11,6 +11,7 @@ import Input from '@mui/joy/Input';
 import LinearProgress from '@mui/joy/LinearProgress';
 import List from '@mui/joy/List';
 // import ListItem from '@mui/joy/ListItem';
+import { useRouter } from 'next/navigation';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton, { listItemButtonClasses } from '@mui/joy/ListItemButton';
 import ListItemContent from '@mui/joy/ListItemContent';
@@ -74,6 +75,13 @@ function Toggler({
 }
 
 export default function Sidebar() {
+
+  const router = useRouter();
+
+  const handleLogoutClick = () => {
+    // Redirect to the main page
+    router.push('/');
+  };
   return (
     <Sheet
       className="Sidebar"
@@ -139,41 +147,8 @@ export default function Sidebar() {
           }}
         >
 
-          {['overview','analytics','interviews','jobs'].map((text, index) => (
-            <Link href={`/employee/${text}`} key={text}>
-           
-           {/* <ListItem key={text} disablePadding sx={{ display: 'block' }}>
-
-
-<ListItemButton
-  sx={{
-    minHeight: 48,
-    
-    px: 2.5,
-  }}
->
-  <ListItemIcon
-    sx={{
-      minWidth: 0,
-      
-      justifyContent: 'center',
-    }}
-  >
-
-    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-
-
-  </ListItemIcon>
-  <ListItemText primary={text}  />
-
-
-
-</ListItemButton>
-</ListItem>
- */}
-
-
-
+          {['Overview','Jobs','Discussinons','Recomended jobs'].map((text, index) => (
+            <Link href={`/employee/${text.toLowerCase()}`} key={text}>
           
            <ListItem key={text} disablePadding sx={{ display: 'block' }}>
             <ListItemButton>
@@ -194,97 +169,11 @@ export default function Sidebar() {
 
 
             </ListItemButton>
-          </ListItem> 
-
-         
-          
-
-          {/* <ListItem nested>
-            <Toggler
-              renderToggle={({ open, setOpen }) => (
-                <ListItemButton onClick={() => setOpen(!open)}>
-                  <AssignmentRoundedIcon />
-                  <ListItemContent>
-                    <Typography level="title-sm">Tasks</Typography>
-                  </ListItemContent>
-                  <KeyboardArrowDownIcon
-                    sx={{ transform: open ? 'rotate(180deg)' : 'none' }}
-                  />
-                </ListItemButton>
-              )}
-            >
-
-              <List sx={{ gap: 0.5 }}>
-                <ListItem sx={{ mt: 0.5 }}>
-                  <ListItemButton>All tasks</ListItemButton>
-                </ListItem>
-                <ListItem>
-                  <ListItemButton>Backlog</ListItemButton>
-                </ListItem>
-                <ListItem>
-                  <ListItemButton>In progress</ListItemButton>
-                </ListItem>
-                <ListItem>
-                  <ListItemButton>Done</ListItemButton>
-                </ListItem>
-              </List>
-            </Toggler>
-          </ListItem> */}
-
-
-
-          
-
-
-{/* dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd */}
-          {/* <ListItem nested>
-
-            <Toggler
-              renderToggle={({ open, setOpen }) => (
-                <ListItemButton onClick={() => setOpen(!open)}>
-                  <GroupRoundedIcon />
-                  <ListItemContent>
-                    <Typography level="title-sm">Users</Typography>
-                  </ListItemContent>
-                  <KeyboardArrowDownIcon
-                    sx={{ transform: open ? 'rotate(180deg)' : 'none' }}
-                  />
-                </ListItemButton>
-              )}
-            >
-              
-              <List sx={{ gap: 0.5 }}>
-                <ListItem sx={{ mt: 0.5 }}>
-                  <ListItemButton
-                    role="menuitem"
-                    component="a"
-                    href="/joy-ui/getting-started/templates/profile-dashboard/"
-                  >
-                    My profile
-                  </ListItemButton>
-                </ListItem>
-                <ListItem>
-                  <ListItemButton>Create a new user</ListItemButton>
-                </ListItem>
-                <ListItem>
-                  <ListItemButton>Roles & permission</ListItemButton>
-                </ListItem>
-              </List>
-            </Toggler>
-              </ListItem> */}
-              {/* dddddddddddddddddddddddddddddddddddddddddddddddddddddddd */}
-
-             
+          </ListItem>             
             </Link>
           ))}
         </List>
 
-
-
-
-
-
- {/* feswkfjdjjjjjjjjjjjjjjjjjjjjjjjjjjjj */}
         <List
           size="sm"
           sx={{
@@ -295,35 +184,41 @@ export default function Sidebar() {
             mb: 2,
           }}
         >
-          <ListItem>
-            <ListItemButton>
-              <SupportRoundedIcon />
-              Support
-            </ListItemButton>
-          </ListItem>
 
-          <ListItem>
-            <ListItemButton>
-              <SettingsRoundedIcon />
-              Settings
-            </ListItemButton>
-          </ListItem>
+      {['setting','support'].map((text, index) => (
+            <Link href={`/employee/${text.toLowerCase()}`} key={text}>
+          
+           <ListItem key={text} disablePadding sx={{ display: 'block' }}>
+          
 
+           <ListItemButton>
+
+         <ListItemIcon
+         sx={{
+           minWidth: 0,
+           
+           justifyContent: 'center',
+         }}
+       >
+     
+         {index % 2 === 0 ?  <SettingsRoundedIcon /> :  <SupportRoundedIcon />}
+     
+     
+       </ListItemIcon>              
+     <ListItemText primary={text}  />
+
+
+    </ListItemButton>
+          </ListItem>
+          </Link>
+          ))}
         </List>
-
- {/* feswkfjdjjjjjjjjjjjjjjjjjjjjjjjjjjjj */}
-
-
-        
       </Box>
 
 
 
       <Divider />
 
-
-
-      {/* dfweasssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss */}
         <Box sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
         <Avatar
           variant="outlined"
@@ -334,9 +229,9 @@ export default function Sidebar() {
           <Typography level="title-sm">Siriwat K.</Typography>
           <Typography level="body-xs">siriwatk@test.com</Typography>
         </Box>
-        <IconButton size="sm" variant="plain" color="neutral">
-          <LogoutRoundedIcon />
-        </IconButton>
+        <IconButton variant="plain" color="neutral" onClick={handleLogoutClick}>
+      <LogoutRoundedIcon />
+    </IconButton>
       </Box>
 
 

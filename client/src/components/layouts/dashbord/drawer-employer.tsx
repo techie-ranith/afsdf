@@ -14,8 +14,8 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
-import Sidebar from './Sidebar-employee';
-
+import Sidebar from './Sidebar-employer';
+import AppBar from './appbar';
 
 const drawerWidth = 240;
 
@@ -45,7 +45,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   alignItems: 'center',
   justifyContent: 'flex-end',
   padding: theme.spacing(0, 1),
-  // necessary for content to be below app bar
+  
   ...theme.mixins.toolbar,
 }));
 
@@ -83,11 +83,18 @@ const MiniDrawer = (props: MiniDrawerProps) => {
 
 
   return (
+    <>
+   
+    
     <Box sx={{ display: 'flex' }}>
-     
+       
+    <AppBar/>
      <Sidebar/>
       <Box component="main" sx={{ flexGrow: 1, bgcolor: 'background.default', p: 3 }}>
-        <DrawerHeader />
+        <DrawerHeader >
+        
+        </DrawerHeader>
+        
         {props.children}
       </Box>
      
@@ -96,6 +103,7 @@ const MiniDrawer = (props: MiniDrawerProps) => {
         
      
     </Box>
+    </>
   );
 }
 

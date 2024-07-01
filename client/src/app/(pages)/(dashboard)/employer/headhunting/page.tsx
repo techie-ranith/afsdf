@@ -5,7 +5,7 @@ const page = () => {
   return (
     <div>
         <LineChart></LineChart>
-        Overview page content
+        head huntung
     </div>
   )
 }
