@@ -1,6 +1,6 @@
 import React from 'react'
 
-const PrimaryJobCard = () => {
+const page = () => {
   return (
     <div>
       
@@ -8,4 +8,4 @@ const PrimaryJobCard = () => {
   )
 }
 
-export default PrimaryJobCard
+export default page
