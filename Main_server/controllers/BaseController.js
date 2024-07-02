@@ -30,10 +30,10 @@ class BaseController {
         try {
             const item = await this.model.findById(id);
             if (!item) {
-                res.status(404).json({ msg: "Item not found" });
-                return;
+                res.status(404).json({ error: "Item not found" });
+            } else {
+                res.status(200).json({ item });
             }
-            res.status(200).json({ item });
         } catch (error) {
             this.handleErrors(res, error);
         }
@@ -42,16 +42,20 @@ class BaseController {
     async createNewItem(data, res) {
         try {
             const item = await this.model.create(data);
-            res.status(200).json({ item });
+            res.status(201).json({ item });
         } catch (error) {
-            res.status(400).json({ error: error.message });
+            this.handleErrors(res, error);
         }
     }
 
     async updateExistingItem(id, data, res) {
         try {
             const updatedItem = await this.model.findByIdAndUpdate(id, data, { new: true });
-            res.status(200).json({ item: updatedItem });
+            if (!updatedItem) {
+                res.status(404).json({ error: "Item not found" });
+            } else {
+                res.status(200).json({ item: updatedItem });
+            }
         } catch (error) {
             this.handleErrors(res, error);
         }
@@ -61,10 +65,10 @@ class BaseController {
         try {
             const deletedItem = await this.model.findByIdAndDelete(id);
             if (!deletedItem) {
-                res.status(404).json({ msg: "Item not found" });
-                return;
+                res.status(404).json({ error: "Item not found" });
+            } else {
+                res.status(200).json({ message: "Item deleted successfully" });
             }
-            res.status(200).json({ msg: "Item deleted successfully" });
         } catch (error) {
             this.handleErrors(res, error);
         }
@@ -72,8 +76,8 @@ class BaseController {
 
     async deleteAllItems(req, res) {
         try {
-            await this.model.deleteMany({}); // Deletes all items from the collection
-            res.status(200).json({ msg: "All items deleted successfully" });
+            await this.model.deleteMany({});
+            res.status(200).json({ message: "All items deleted successfully" });
         } catch (error) {
             this.handleErrors(res, error);
         }

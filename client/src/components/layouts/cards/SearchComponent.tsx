@@ -44,7 +44,7 @@ const SearchComponent = () => {
   };
 
   return (
-    <div className='flex flex-col gap-2 border-0 shadow-lg rounded-md p-4'>
+    <div className='flex flex-col gap-2 border-2 shadow-lg rounded-md p-4 border-primary-800'>
       <div className='flex items-center justify-center gap-4'>
         <ComboBox data={jobTitles} placeholder='select keywords'></ComboBox>
         <ComboBox data={location} placeholder='location'></ComboBox>
