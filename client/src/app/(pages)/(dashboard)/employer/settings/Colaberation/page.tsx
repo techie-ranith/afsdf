@@ -1,13 +1,11 @@
 import React from 'react'
 
-function page() {
+const page = () => {
   return (
     <div>
-        profile
       
     </div>
   )
 }
 
 export default page
-
