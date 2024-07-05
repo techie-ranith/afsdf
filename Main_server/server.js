@@ -1,6 +1,7 @@
 // server.js
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors');
 const dotenv = require('dotenv');
 const JobRoutes = require('./routes/JobRoutes');
 const OrganizationRoutes = require("./routes/OrganizationRoutes")
@@ -12,10 +13,13 @@ const port = process.env.PORT || 8080;
 
 // Middleware
 app.use(express.json());
+app.use(cors());
+
 // Routes
 app.use('/api/jobs', JobRoutes);
 app.use('/api/organization',OrganizationRoutes);
 app.use('/api/meetings', MeeitngRoutes);
+app.use('api/search', JobRoutes);
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI)

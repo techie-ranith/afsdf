@@ -44,7 +44,7 @@ class JobController extends BaseController {
         await this.deleteAllItems(req, res);
     }
 
-    async primaryJobCard(req, res) {
+    async primaryJobDearch(req, res) {
         const id = req.params.id;
         if (!this.validateId(id, res)) {
             return;
@@ -66,6 +66,7 @@ class JobController extends BaseController {
         }
         await this.getSingleItem(id, res);
     }
+
 }
 
 module.exports = new JobController();
