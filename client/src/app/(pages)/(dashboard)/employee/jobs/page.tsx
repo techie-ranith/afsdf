@@ -4,8 +4,12 @@ import JobCardSecondary, { JobCardSecondaryProps } from '@/components/layouts/ca
 import JobDescription, { JobDescriptionProps } from '@/components/layouts/cards/jobDescription';
 import SearchComponent from '@/components/layouts/cards/SearchComponent';
 
+interface ExtendedJobCardSecondaryProps extends JobCardSecondaryProps {
+  id: string;
+}
+
 const Page: React.FC = () => {
-  const [jobData, setJobData] = useState<JobCardSecondaryProps[] | null>(null);
+  const [jobData, setJobData] = useState<ExtendedJobCardSecondaryProps[] | null>(null);
   const [selectedJob, setSelectedJob] = useState<JobDescriptionProps | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 

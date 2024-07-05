@@ -53,12 +53,12 @@ const page = () => {
   
   return (
     <div className='flex items-start justify-center'>
-      <div className='flex flex-col items-center justify-center flex-1 border-2'>
+      <div className='flex flex-col items-center justify-center flex-1 '>
         <p>Applied Jobs</p>
         <DataGrid rows={rows} columns={columns} gridwidth='80%' pageSize={5}/>
         <LineChart></LineChart>
       </div>
-      <div className='flex flex-col items-center justify-start flex-2 border-2'>
+      <div className='flex flex-col items-center justify-start flex-2 '>
         <p>Scheduled Meetings</p>
         <Calander></Calander>
       </div>
