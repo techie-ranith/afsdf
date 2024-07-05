@@ -7,66 +7,41 @@ class OrganizationController extends BaseController {
     }
 
     async getSingleOrganization(req, res) {
-        try {
-            const id = req.params.id;
-            if (!this.validateId(id, res)) {
-                return;
-            }
-            const organization = await this.getSingleItem(id, res);
-            res.status(200).json({ organization });
-        } catch (error) {
-            res.status(500).json({ error: error.message });
+        const id = req.params.id;
+        if (!this.validateId(id, res)) {
+            return;
         }
+        this.getSingleItem(id, res);
     }
 
     async getAllOrganizations(req, res) {
-        await this.getAllItems(req, res);
+        this.getAllItems(req, res);
     }
 
     async createNewOrganization(req, res) {
-        try {
-            const data = req.body;
-            const organization = await this.createNewItem(data, res);
-            res.status(200).json({ organization });
-        } catch (error) {
-            res.status(500).json({ error: error.message });
-        }
+        const data = req.body;
+        this.createNewItem(data, res);
     }
 
     async updateOrganization(req, res) {
-        try {
-            const id = req.params.id;
-            if (!this.validateId(id, res)) {
-                return;
-            }
-            const data = req.body;
-            const organization = await this.updateExistingItem(id, data, res);
-            res.status(200).json({ organization });
-        } catch (error) {
-            res.status(500).json({ error: error.message });
+        const id = req.params.id;
+        if (!this.validateId(id, res)) {
+            return;
         }
+        const data = req.body;
+        this.updateExistingItem(id, data, res);
     }
 
     async deleteSingleOrganization(req, res) {
-        try {
-            const id = req.params.id;
-            if (!this.validateId(id, res)) {
-                return;
-            }
-            const organization = await this.deleteSingleItem(id, res);
-            res.status(200).json({ organization });
-        } catch (error) {
-            res.status(500).json({ error: error.message });
+        const id = req.params.id;
+        if (!this.validateId(id, res)) {
+            return;
         }
+        this.deleteSingleItem(id, res);
     }
 
     async deleteAllOrganizations(req, res) {
-        try {
-            const result = await this.deleteAllItems(req, res);
-            res.status(200).json({ message: `${result.deletedCount} organizations deleted` });
-        } catch (error) {
-            res.status(500).json({ error: error.message });
-        }
+        this.deleteAllItems(req, res);
     }
 }
 
