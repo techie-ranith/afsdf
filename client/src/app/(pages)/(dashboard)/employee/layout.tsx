@@ -1,10 +1,9 @@
 
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import Drawer from "@/components/layouts/dashbord/drawer-employer";
+import Drawer from "@/components/layouts/dashbord/drawer-employee";
 import { getServerSession } from "next-auth";
 import SessionProvider  from "@/components/layouts/other/sessionprovider";
-import Sidebar from "@/components/layouts/dashbord/Sidebar-employer";
 import { redirect } from 'next/navigation';
 const inter = Inter({ subsets: ["latin"] });
 
