@@ -44,14 +44,6 @@ class JobController extends BaseController {
         await this.deleteAllItems(req, res);
     }
 
-    async primaryJobDearch(req, res) {
-        const id = req.params.id;
-        if (!this.validateId(id, res)) {
-            return;
-        }
-        await JobModel.find().select('title department employmentType classification skills location');
-    }
-
     async secondaryJobCard(req, res) {
         const id = req.params.id;
         if (!this.validateId(id, res)) {
@@ -64,6 +56,11 @@ class JobController extends BaseController {
         if (!this.validateId(id, res)) {
             return;
         }
+        await this.getSingleItem(id, res);
+    }
+    async primaryJobSearch(req, res) {
+        const id = req.params.id;
+            data = await JobModel.jobSchema.find(req.query)
         await this.getSingleItem(id, res);
     }
 

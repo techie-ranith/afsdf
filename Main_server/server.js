@@ -19,7 +19,7 @@ app.use(cors());
 app.use('/api/jobs', JobRoutes);
 app.use('/api/organization',OrganizationRoutes);
 app.use('/api/meetings', MeeitngRoutes);
-app.use('api/search', JobRoutes);
+// app.use('api/', JobRoutes);
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI)
