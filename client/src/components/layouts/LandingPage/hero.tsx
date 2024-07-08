@@ -155,6 +155,24 @@ const Hero = () => {
     setShowForgetPassword(!showForgetPassword);
   };
 
+
+
+  const handleSignInWithGoogle = async () => {
+    try {
+      const result = await signIn('google', {
+        callbackUrl: '/employer/hiring/jobs',
+        
+      });
+
+    
+    } catch (error) {
+      console.error('Error signing in with Google:', error);
+      // Handle any other errors that may occur during sign-in
+    }
+  };
+
+
+
   return (
     <div className='flex items-start justify-center gap-40'>
       <div>
@@ -174,7 +192,8 @@ const Hero = () => {
               color: 'blue',
             },
           }}
-          onClick={() => signIn('google')}
+          onClick={handleSignInWithGoogle }
+         
         >
           <div style={{ display: 'flex', flexDirection: 'row', gap: '3px' }}>
             <div style={{ display: 'flex', flexDirection: 'row', gap: '160px' }}>
