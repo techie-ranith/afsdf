@@ -186,6 +186,7 @@ const JobPostingForm: React.FC = () => {
             onChange={handleChange}
           />
         </Grid>
+        
         <Grid item xs={7}>
           <Button
             type="submit"
