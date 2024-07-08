@@ -36,8 +36,10 @@ import Link from 'next/link';
 import MailIcon from '@mui/icons-material/Mail';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-
+import {signOut} from 'next-auth/react';
+import { useSession } from 'next-auth/react';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
+import { KeyboardArrowRight } from '@mui/icons-material';
 
 
 
@@ -77,11 +79,15 @@ function Toggler({
 export default function Sidebar() {
 
   const router = useRouter();
-
-  const handleLogoutClick = () => {
-    // Redirect to the main page
-    router.push('/');
+  const handleLogout = () => {
+    signOut(); 
+  
   };
+  
+const {data: session } = useSession();
+const im = session?.user?.image || undefined;
+
+
   return (
     <Sheet
       className="Sidebar"
@@ -116,11 +122,11 @@ export default function Sidebar() {
         })}
       />
      
-      <Box sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
-        <IconButton variant="soft" color="primary" size="sm">
-          <BrightnessAutoRoundedIcon />
-        </IconButton>
-        <Typography level="title-lg">Recruitwise</Typography>
+      <Box sx={{ display: 'flex', gap: 1, alignItems: 'center',justifyContent: "center" }}>
+         <Link href={'/'} >
+        <img src="/recruitwise.png" alt="" width={150} />
+        </Link>
+        
        
       </Box>
       <Input size="sm" startDecorator={<SearchRoundedIcon />} placeholder="Search" />
@@ -172,6 +178,11 @@ export default function Sidebar() {
           </ListItem>             
             </Link>
           ))}
+          <Link href="/employer/hiring/jobs" passHref>
+          <Button endDecorator={<KeyboardArrowRight />} color="success">
+            Employer View
+          </Button>
+         </Link>
         </List>
 
         <List
@@ -219,17 +230,18 @@ export default function Sidebar() {
 
       <Divider />
 
-        <Box sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
+      <Box sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
         <Avatar
-          variant="outlined"
-          size="sm"
-          src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=286"
-        />
+      variant="outlined"
+      size="lg"
+      src={im }
+      alt="Profile Picture"
+    />
         <Box sx={{ minWidth: 0, flex: 1 }}>
-          <Typography level="title-sm">Siriwat K.</Typography>
-          <Typography level="body-xs">siriwatk@test.com</Typography>
+          <Typography level="title-sm">{session?.user?.name}</Typography>
         </Box>
-        <IconButton variant="plain" color="neutral" onClick={handleLogoutClick}>
+        
+        <IconButton variant="plain" color="neutral" onClick={handleLogout} >
       <LogoutRoundedIcon />
     </IconButton>
       </Box>

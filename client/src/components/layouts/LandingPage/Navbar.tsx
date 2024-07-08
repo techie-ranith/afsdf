@@ -1,3 +1,4 @@
+"use client"
 import Image from 'next/image'
 import React from 'react'
 import logo from '../../../../public/recruitwise.png'
@@ -7,8 +8,17 @@ import FeedIcon from '@mui/icons-material/Feed';
 import CategoryIcon from '@mui/icons-material/Category';
 import PeopleIcon from '@mui/icons-material/People';
 import Link from 'next/link';
-
+import { useSession } from 'next-auth/react';
+import { Avatar, Box, IconButton } from '@mui/joy';
+import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
+import { signOut } from 'next-auth/react';
 const Navbar = () => {
+  const {data: session } = useSession();
+  const handleLogout = () => {
+    signOut(); 
+  
+  };
+  const im = session?.user?.image || undefined;
   return (
     <div className='flex items-center justify-between w-full py-2 px-10 border-primary-200'>
       <Link href="/">  <Image src={logo} alt='logo' width={160} className='border-0 rounded-xl'></Image></Link>
@@ -39,6 +49,39 @@ const Navbar = () => {
                 <div>About Us</div>
             </div>
             </Link>
+            {session && (<>
+          <Link href="/employee/overview">
+            <div className='flex flex-col items-center justify-center'>
+              <PeopleIcon />
+              <div>Dashboard</div>
+            </div>
+          </Link>
+
+                 <div className='flex flex-col items-center justify-center'>
+                 <IconButton variant="plain" color="neutral" onClick={handleLogout} >
+                <LogoutRoundedIcon />
+                 </IconButton>
+                 <div>Log Out</div>
+                 
+                 </div>
+               
+                 <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                          <Avatar
+                        variant="outlined"
+                        size='lg'
+                        src={im}
+                        alt="Profile Picture"
+                      />
+                         
+                                  
+                  </Box>
+                  
+
+
+                 </>
+        )}
+
+
         </div>
         
     </div>

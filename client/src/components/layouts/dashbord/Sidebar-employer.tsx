@@ -43,6 +43,7 @@ import { red } from '@mui/material/colors';
 import { redirect } from 'next/navigation';
 import { useScatterChartProps } from '@mui/x-charts/internals';
 import { useSession,signOut } from 'next-auth/react';
+import { KeyboardArrowRight } from '@mui/icons-material';
 
 function Toggler({
   defaultExpanded = false,
@@ -119,11 +120,10 @@ const im = session?.user?.image || undefined;
         })}
       />
      
-      <Box sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
-        <IconButton variant="soft" color="primary" size="sm">
-          <BrightnessAutoRoundedIcon />
-        </IconButton>
-        <Typography level="title-lg">Recruitwise</Typography>
+      <Box sx={{ display: 'flex', gap: 1, alignItems: 'center' ,justifyContent:"center" }}>
+       <Link href={'/'} >
+        <img src="/recruitwise.png" alt="" width={150} />
+        </Link>
        
       </Box>
       <Input size="sm" startDecorator={<SearchRoundedIcon />} placeholder="Search" />
@@ -230,12 +230,16 @@ const im = session?.user?.image || undefined;
 
 
 
-
+        <Link href="/employee/overview" passHref>
+          <Button endDecorator={<KeyboardArrowRight />} color="success">
+            Employee View
+          </Button>
+         </Link>
 
         </List>
 
 
-
+      
 
         <List
           size="sm"
@@ -291,8 +295,8 @@ const im = session?.user?.image || undefined;
         <Box sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
         <Avatar
       variant="outlined"
-      size="sm"
-      src={im}
+      size="lg"
+      src={im }
       alt="Profile Picture"
     />
         <Box sx={{ minWidth: 0, flex: 1 }}>
