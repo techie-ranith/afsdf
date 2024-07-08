@@ -39,7 +39,10 @@ import AttributionRoundedIcon from '@mui/icons-material/AttributionRounded';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import { AppBar } from '@mui/material';
 
-
+import { red } from '@mui/material/colors';
+import { redirect } from 'next/navigation';
+import { useScatterChartProps } from '@mui/x-charts/internals';
+import { useSession,signOut } from 'next-auth/react';
 
 function Toggler({
   defaultExpanded = false,
@@ -73,14 +76,14 @@ function Toggler({
   );
 }
 
-export default function Sidebar() {
-
-  const router = useRouter();
-
-  const handleLogoutClick = () => {
-    // Redirect to the main page
-    router.push('/');
+export default  function Sidebar() {
+  const handleLogout = () => {
+    signOut(); 
+  
   };
+  
+const {data: session } = useSession();
+const im = session?.user?.image || undefined;
 
   return (
     <Sheet
@@ -287,15 +290,16 @@ export default function Sidebar() {
       {/* dfweasssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss */}
         <Box sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
         <Avatar
-          variant="outlined"
-          size="sm"
-          src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=286"
-        />
+      variant="outlined"
+      size="sm"
+      src={im}
+      alt="Profile Picture"
+    />
         <Box sx={{ minWidth: 0, flex: 1 }}>
-          <Typography level="title-sm">Siriwat K.</Typography>
-          <Typography level="body-xs">siriwatk@test.com</Typography>
+          <Typography level="title-sm">{session?.user?.name}</Typography>
         </Box>
-        <IconButton variant="plain" color="neutral" onClick={handleLogoutClick}>
+        
+        <IconButton variant="plain" color="neutral" onClick={handleLogout} >
       <LogoutRoundedIcon />
     </IconButton>
       </Box>

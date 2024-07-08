@@ -19,7 +19,7 @@ const userSchema = new Schema(
     },
     verificationCodeExpires: { type: Date, expires: 0, default: Date.now },
   },
-  { timestamps: true }
+  { timestamps: true ,collection: "user"}
 );
 
 export default mongoose.models.User || mongoose.model("User", userSchema);
