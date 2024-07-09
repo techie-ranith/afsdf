@@ -30,7 +30,7 @@ const Page: React.FC = () => {
 
   const fetchJobDetails = async (jobId: string) => {
     try {
-      const response = await fetch(`/api/jobs${jobId}`);
+      const response = await fetch(`/api/jobSearch${jobId}`);
       const data = await response.json();
       setSelectedJob(data);
     } catch (error) {
