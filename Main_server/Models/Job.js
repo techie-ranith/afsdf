@@ -6,6 +6,7 @@ const jobSchema = new Schema({
     logo:{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Organization',
+        required: true
     },
     title: {
         type: String,

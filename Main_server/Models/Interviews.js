@@ -5,7 +5,19 @@ const meetingSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    description: String,
+    jobid: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Job',
+        required: true
+    },
+    meetingid: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'meeting',
+        required: true
+    },
+    description: {
+        String
+    },
     date: {
         type: Date,
         required: true
@@ -19,8 +31,8 @@ const meetingSchema = new mongoose.Schema({
         required: true
     },
     attendees: {
-        type: [String],
-        required: true
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'user',
     },
     minutes: String,
     notes: String

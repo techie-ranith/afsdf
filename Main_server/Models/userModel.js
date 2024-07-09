@@ -1,8 +1,12 @@
 const mongoose = require('mongoose');
 const { Schema, models } = mongoose;
 const userSchema = new Schema(
-
     {
+        authprivider:{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'CredentialProvider',
+            required: true
+        },
         firstname:
         {
             type:String,

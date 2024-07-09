@@ -5,10 +5,14 @@ const organizationSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    
+    jobid: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'user',
+        required: true
+    },
     orgType: {
         type: String,
-        enum: ['Corporation', 'Non-Profit', 'Government Agency'] // Assuming these are the only types
+        enum: ['Corporation', 'Non-Profit', 'Government Agency']
     },
     industry: String,
     address: {
@@ -17,10 +21,6 @@ const organizationSchema = new mongoose.Schema({
         state: String,
         postalCode: String,
         country: String
-    },
-    contactPerson: {
-        type: String,
-        required: true
     },
     contactEmail: {
         type: String,
@@ -33,12 +33,8 @@ const organizationSchema = new mongoose.Schema({
     website: String,
     description: String,
     logo: String, // Assuming you store the path or URL of the uploaded logo
-    taxID: String,
     establishedDate: Date,
-    employees: Number,
-    revenue: Number,
     socialMedia: String,
-    notes: String
 });
 
 const Organization = mongoose.model('Organization', organizationSchema);
