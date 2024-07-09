@@ -22,6 +22,6 @@
       "components/*": ["./src/app/components/*"],
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/data/jobtitles.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/data/jobtitles.js", "src/components/layouts/cards/SearchComponent.tsx"],
   "exclude": ["node_modules"]
 }

@@ -4,18 +4,20 @@ import Autocomplete from '@mui/material/Autocomplete';
 
 interface ComboBoxProps {
   data: { label: string }[];
-  placeholder:string;
+  placeholder: string;
+  onChange: (value: string) => void; // Add onChange prop
 }
 
-const ComboBox: React.FC<ComboBoxProps> = ({ data, placeholder }) => {
+const ComboBox: React.FC<ComboBoxProps> = ({ data, placeholder, onChange }) => {
   return (
     <Autocomplete
       disablePortal
       id="combo-box-demo"
       options={data}
-      getOptionLabel={(option) => option.label} // Provide a function to get the label from each item
+      getOptionLabel={(option) => option.label}
       sx={{ width: 300 }}
-      renderInput={(params) => <TextField {...params} label={placeholder} />} // Update label to "Job"
+      onChange={(_, value) => onChange(value?.label || '')} // Call onChange with the selected value
+      renderInput={(params) => <TextField {...params} label={placeholder} />}
     />
   );
 }

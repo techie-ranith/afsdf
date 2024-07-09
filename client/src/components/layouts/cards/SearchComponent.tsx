@@ -1,4 +1,3 @@
-// SearchComponent.tsx
 'use client'
 
 import React, { useEffect, useState } from 'react';
@@ -8,12 +7,12 @@ import DropDown from "@/components/layouts/cards/DropDown";
 import Button from '@/components/Buttons/Buttons';
 
 interface Data {
-  jobTitles: { label: string }[];
-  locations: { label: string }[];
-  jobTypes: { label: string }[];
-  modalities: { label: string }[];
-  countries: { label: string }[];
-  salaries: { label: string }[];
+  jobTitles: { label: string; value: string }[];
+  locations: { label: string; value: string }[];
+  jobTypes: { label: string; value: string }[];
+  modalities: { label: string; value: string }[];
+  countries: { label: string; value: string }[];
+  salaries: { label: string; value: string }[];
 }
 
 interface SearchParams {
@@ -47,14 +46,14 @@ const SearchComponent: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('/api/');
+        const response = await axios.get('/api/jobSearch');
         const formattedData = {
-          jobTitles: response.data.jobTitles.map((item: string) => ({ label: item })),
-          locations: response.data.locations.map((item: string) => ({ label: item })),
-          jobTypes: response.data.jobTypes.map((item: string) => ({ label: item })),
-          modalities: response.data.modalities.map((item: string) => ({ label: item })),
-          countries: response.data.countries.map((item: string) => ({ label: item })),
-          salaries: response.data.salaries.map((item: string) => ({ label: item })),
+          jobTitles: response.data.jobTitles.map((item: string) => ({ label: item, value: item })),
+          locations: response.data.locations.map((item: string) => ({ label: item, value: item })),
+          jobTypes: response.data.jobTypes.map((item: string) => ({ label: item, value: item })),
+          modalities: response.data.modalities.map((item: string) => ({ label: item, value: item })),
+          countries: response.data.countries.map((item: string) => ({ label: item, value: item })),
+          salaries: response.data.salaries.map((item: string) => ({ label: item, value: item })),
         };
         setData(formattedData);
       } catch (error) {

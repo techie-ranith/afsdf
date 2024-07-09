@@ -6,9 +6,9 @@ import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 interface BasicSelectProps {
-  title: string; // Adding title property
-  items: { label: string; value: string}[]; // Adding value property to items
-  onChange: (selectedValue: string) => void; // Adding onChange event handler
+  title: string; 
+  items: { label: string; value: string }[]; 
+  onChange: (selectedValue: string) => void; 
 }
 
 const BasicSelect: React.FC<BasicSelectProps> = ({ title, items, onChange }) => {
@@ -17,7 +17,7 @@ const BasicSelect: React.FC<BasicSelectProps> = ({ title, items, onChange }) => 
   const handleChange = (event: SelectChangeEvent) => {
     const value = event.target.value as string;
     setSelectedValue(value);
-    onChange(value); // Call the onChange event handler with the selected value
+    onChange(value);
   };
 
   return (
