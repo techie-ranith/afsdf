@@ -13,43 +13,45 @@ const columns: GridColDef[] = [
   { field: 'id', headerName: 'ID', width: 90 },
   {
     field: 'Title',
-    headerName: 'Meeting Title',
+    headerName: 'Job Title',
     width: 150,
     editable: true,
   },
   {
     field: 'JobDescription',
-    headerName: 'Meeting Description',
+    headerName: 'Job Description',
     width: 150,
     editable: true,
   },
   {
-    field: 'Date',
-    headerName: 'Date',
-    type: 'number',
-    width: 110,
+    field: 'EmployeeName',
+    headerName: 'Employee Name',
+    type: 'string', // Changed from 'number' to 'string' as it represents a name
+    width: 150,
     editable: true,
   },
   {
-    field: 'attendies',
-    headerName: 'attendies',
+    field: 'Meeting_status',
+    headerName: 'Meeting Status',
     description: 'This column has a value getter and is not sortable.',
     sortable: false,
     width: 160,
-    valueGetter: (value, row) => `${row.Title || ''} ${row.JobDescription || ''}`,
+  },
+  {
+    field: 'CV',
+    headerName: 'View CV',
+    description: 'This column has a value getter and is not sortable.',
+    sortable: false,
+    width: 160,
   },
 ];
 
 const rows = [
-  { id: 1, JobDescription: 'Snow', Title: 'Jon', DueDate: 14 },
-  { id: 2, JobDescription: 'Lannister', Title: 'Cersei', DueDate: 31 },
-  { id: 3, JobDescription: 'Lannister', Title: 'Jaime', DueDate: 31 },
-  { id: 4, JobDescription: 'Stark', Title: 'Arya', DueDate: 11 },
-  { id: 5, JobDescription: 'Targaryen', Title: 'Daenerys', DueDate: 23  },
-  { id: 6, JobDescription: 'Melisandre', Title: "Ranith", DueDate: 150 },
-  { id: 7, JobDescription: 'Clifford', Title: 'Ferrara', DueDate: 44 },
-  { id: 8, JobDescription: 'Frances', Title: 'Rossini', DueDate: 36 },
-  { id: 9, JobDescription: 'Roxie', Title: 'Harvey', DueDate: 23 },
+  { id: 1, Title: 'Software Engineer', JobDescription: 'Develop and maintain software applications.', EmployeeName: 'John Doe', Meeting_status: 'Scheduled', CV: 'View' },
+  { id: 2, Title: 'Data Scientist', JobDescription: 'Analyze and interpret complex data.', EmployeeName: 'Jane Smith', Meeting_status: 'Pending', CV: 'View' },
+  { id: 3, Title: 'Product Manager', JobDescription: 'Oversee the development and delivery of products.', EmployeeName: 'Emily Johnson', Meeting_status: 'Completed', CV: 'View' },
+  { id: 4, Title: 'UX Designer', JobDescription: 'Design user-friendly interfaces and experiences.', EmployeeName: 'Michael Brown', Meeting_status: 'Scheduled', CV: 'View' },
+  { id: 5, Title: 'DevOps Engineer', JobDescription: 'Manage infrastructure and deployment processes.', EmployeeName: 'Chris Davis', Meeting_status: 'In Progress', CV: 'View' },
 ];
 
 const Hiring = () => {
@@ -85,7 +87,13 @@ const Hiring = () => {
         </div>
       </div>
       <div className='flex flex-col gap-8 items-center justify-center'>
-            <DataGrid rows={rows} columns={columns} gridwidth='100%' pageSize={10}/>
+      <DataGrid 
+  rows={rows} 
+  columns={columns} 
+  gridwidth='100%' 
+  sx={{ height: '100vh', width: '100%' }} 
+  pageSize={10} 
+/>
       </div>
     </div>
   );
