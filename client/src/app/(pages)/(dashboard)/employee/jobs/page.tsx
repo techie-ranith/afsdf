@@ -1,8 +1,10 @@
-'use client'
+'use client';
+
 import React, { useState, useEffect } from 'react';
 import JobCardSecondary, { JobCardSecondaryProps } from '@/components/layouts/cards/jobCardSecondary';
 import JobDescription, { JobDescriptionProps } from '@/components/layouts/cards/jobDescription';
 import SearchComponent from '@/components/layouts/cards/SearchComponent';
+import axios from 'axios';
 
 interface ExtendedJobCardSecondaryProps extends JobCardSecondaryProps {
   id: string;
@@ -13,8 +15,26 @@ const Page: React.FC = () => {
   const [selectedJob, setSelectedJob] = useState<JobDescriptionProps | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
+  const [searchParams, setSearchParams] = useState({
+    jobTitle: '',
+    location: '',
+    jobType: '',
+    modality: '',
+    country: '',
+    salary: ''
+  });
+
+  const handleSearch = async (params: typeof searchParams) => {
+    try {
+      const response = await axios.get('/api/jobsearch/jobsearch', { params });
+      setJobData(response.data);
+    } catch (error) {
+      console.error('Error making search API call:', error);
+    }
+  };
+
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchJobs = async () => {
       try {
         const response = await fetch('/api/jobs');
         const data = await response.json();
@@ -25,7 +45,7 @@ const Page: React.FC = () => {
         setLoading(false);
       }
     };
-    fetchData();
+    fetchJobs();
   }, []);
 
   const fetchJobDetails = async (jobId: string) => {
@@ -48,7 +68,11 @@ const Page: React.FC = () => {
 
   return (
     <div className='flex justify-center gap-4'>
-      <SearchComponent />
+      <SearchComponent 
+        searchParams={searchParams}
+        setSearchParams={setSearchParams}
+        handleSearch={handleSearch}
+      />
       <div className='flex flex-col justify-center gap-4'>
         {jobData.map((job, index) => (
           <div key={index} onClick={() => fetchJobDetails(job.id)}>

@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
@@ -24,7 +24,13 @@ interface SearchParams {
   salary: string;
 }
 
-const SearchComponent: React.FC = () => {
+interface SearchComponentProps {
+  searchParams: SearchParams;
+  setSearchParams: React.Dispatch<React.SetStateAction<SearchParams>>;
+  handleSearch: (params: SearchParams) => void;
+}
+
+const SearchComponent: React.FC<SearchComponentProps> = ({ searchParams, setSearchParams, handleSearch }) => {
   const [data, setData] = useState<Data>({
     jobTitles: [],
     locations: [],
@@ -32,15 +38,6 @@ const SearchComponent: React.FC = () => {
     modalities: [],
     countries: [],
     salaries: []
-  });
-
-  const [searchParams, setSearchParams] = useState<SearchParams>({
-    jobTitle: '',
-    location: '',
-    jobType: '',
-    modality: '',
-    country: '',
-    salary: ''
   });
 
   useEffect(() => {
@@ -78,15 +75,8 @@ const SearchComponent: React.FC = () => {
     }));
   };
 
-  const handleSearch = async () => {
-    try {
-      const response = await axios.get('/api/jobsearch', {
-        params: searchParams
-      });
-      console.log('Search results:', response.data);
-    } catch (error) {
-      console.error('Error making search API call:', error);
-    }
+  const handleSearchClick = () => {
+    handleSearch(searchParams);
   };
 
   return (
@@ -102,7 +92,7 @@ const SearchComponent: React.FC = () => {
           placeholder='location'
           onChange={(value: string) => handleComboBoxChange('location', value)}
         />
-        <Button variant="primary" size="medium" onClick={handleSearch}>Search</Button>
+        <Button variant="primary" size="medium" onClick={handleSearchClick}>Search</Button>
       </div>
       <div className='flex items-center justify-between'>
         <div className='flex items-center justify-start gap-2'>

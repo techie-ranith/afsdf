@@ -192,7 +192,6 @@ const JobPostingForm: React.FC = () => {
             type="submit"
             variant="contained"
             color="primary"
-           
           >
             Submit
           </Button>
