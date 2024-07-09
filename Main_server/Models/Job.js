@@ -1,7 +1,12 @@
+const { timeStamp } = require('console');
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const jobSchema = new Schema({
+    logo:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Organization',
+    },
     title: {
         type: String,
         required: true
@@ -12,14 +17,16 @@ const jobSchema = new Schema({
     },
     employmentType: {
         type: String,
+        enum: ['Full-Time', 'Part-Time', 'Contract', 'Temporary', 'Internship'],
         required: true
     },
-    classification: {
+    modality: {
         type: String,
+        enum: ['Remote', 'On-Site', 'Hybrid'],
         required: true
     },
     skills: {
-        type: [String] // Assuming skills can be an array of strings
+        type: [String]
     },
     location: {
         type: String,
@@ -31,15 +38,15 @@ const jobSchema = new Schema({
     },
     includeSalary: {
         type: Boolean,
-        default: true // Assuming it's checked by default
+        default: true 
     },
     currency: {
         type: String,
-        enum: ['USD', 'EUR', 'GBP'] // Add more currencies as needed
+        required: true
     },
     paidEvery: {
         type: String,
-        enum: ['Month', 'Week', 'Year'] // Add more options as needed
+        required: true
     },
     minSalary: {
         type: Number,
@@ -48,6 +55,19 @@ const jobSchema = new Schema({
     maxSalary: {
         type: Number,
         required: true
+    },
+    experienceLevel: {
+        type: String,
+        required: true
+    },
+    status: {
+        type: String,
+        enum: ['open', 'closed', 'filled'],
+        default: 'open'
+    },
+    timeStamp:{
+        type: Date,
+        default: Date.now
     }
 });
 

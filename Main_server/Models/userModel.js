@@ -23,6 +23,16 @@ const userSchema = new Schema(
             type:String,
             required:true
         },
+        status:{
+            type:String,
+            enum:['employee','employer'],
+            default:'employee',
+            required:true   
+        },
+        organization:{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Organization',
+        },
     }
     ,{
         timestamps:true,
