@@ -1,4 +1,5 @@
 const JobModel = require('../Models/Job');
+const {primaryJobSearch, secondaryJobCard, jobDescription} = require('../Models/jobSearch');
 const BaseController = require('./BaseController');
 
 class JobController extends BaseController {
