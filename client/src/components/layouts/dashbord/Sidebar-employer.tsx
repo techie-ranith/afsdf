@@ -144,8 +144,8 @@ const im = session?.user?.image || undefined;
         <List
           size="sm"
           sx={{
-            gap: 1,
-            '--List-nestedInsetStart': '30px',
+            
+            '--List-nestedInsetStart': '3px',
             '--ListItem-radius': (theme) => theme.vars.radius.sm,
           }}
         >
@@ -192,7 +192,7 @@ const im = session?.user?.image || undefined;
             </Toggler>
           </ListItems>
 
-          {['Headhunting','Interviews','Manage','Profile'].map((text, index) => (
+          {['Overview','Headhunting','Interviews','Manage','Notification'].map((text, index) => (
             <Link href={`/employer/${text.toLowerCase()}`} key={text}>
            
   
@@ -241,6 +241,48 @@ const im = session?.user?.image || undefined;
 
       
 
+        <ListItems nested>
+            <Toggler 
+              renderToggle={({ open, setOpen }) => (
+                <ListItemButton onClick={() => setOpen(!open)} sx={{paddingLeft:'8px'}}>
+                  <AssignmentRoundedIcon/>
+                  <ListItemContent>
+                    <Typography level="title-sm">Settings</Typography>
+                  </ListItemContent>
+                  <KeyboardArrowDownIcon
+                    sx={{ transform: open ? 'rotate(180deg)' : 'none' }}
+                  />
+                </ListItemButton>
+              )}
+            >
+              <List sx={{ gap: 0.5 }}>
+
+              {['Billing','Colaberation','General','Profile'].map((text, index) => (
+            <Link href={`/employer/settings/${text.toLowerCase()}`} key={text}>
+           
+  
+          
+           <ListItem key={text} disablePadding sx={{ display: 'block',pl:'40px' }}>
+
+            <ListItemText primary={text}  />
+               
+             
+           </ListItem> 
+
+         
+          
+
+      
+           </Link>
+           ))}
+           
+              </List>
+            </Toggler>
+          </ListItems>
+
+
+      
+
         <List
           size="sm"
           sx={{
@@ -252,7 +294,7 @@ const im = session?.user?.image || undefined;
           }}
         >
 
-      {['Settings','Support'].map((text, index) => (
+      {['Support'].map((text, index) => (
             <Link href={`/employer/${text.toLowerCase()}`} key={text}>
           
            <ListItem key={text} disablePadding sx={{ display: 'block' }}>

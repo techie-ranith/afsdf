@@ -153,7 +153,7 @@ const im = session?.user?.image || undefined;
           }}
         >
 
-          {['Overview','Jobs','Discussinons','Recomended jobs'].map((text, index) => (
+          {['Overview','Jobs','Interviews','Recomended jobs'].map((text, index) => (
             <Link href={`/employee/${text.toLowerCase()}`} key={text}>
           
            <ListItem key={text} disablePadding sx={{ display: 'block' }}>
@@ -196,7 +196,7 @@ const im = session?.user?.image || undefined;
           }}
         >
 
-      {['setting','support'].map((text, index) => (
+      {['settings','support'].map((text, index) => (
             <Link href={`/employee/${text.toLowerCase()}`} key={text}>
           
            <ListItem key={text} disablePadding sx={{ display: 'block' }}>

@@ -1,9 +1,10 @@
 import React from 'react'
 
-const page = () => {
+function page() {
   return (
     <div>
-      coloberation
+        support
+      
     </div>
   )
 }
