@@ -1,9 +1,9 @@
 import React from 'react'
-
+import Support from '@/components/layouts/dashbord/support';
 function page() {
   return (
     <div>
-      support
+     <Support/>
     </div>
   )
 }
