@@ -46,7 +46,9 @@ const userSchema = new Schema(
       type: String,
       required: false,
     },
-
+    fileupload: { type: String,
+      required: false,
+     }
 
     
 

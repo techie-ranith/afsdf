@@ -32,6 +32,7 @@ import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
 import BrightnessAutoRoundedIcon from '@mui/icons-material/BrightnessAutoRounded';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 // import { ListItemIcon, ListItemText } from '@mui/material';
+import ListItems from '@mui/joy/ListItem';
 import Link from 'next/link';
 import MailIcon from '@mui/icons-material/Mail';
 import ListItemIcon from '@mui/material/ListItemIcon';
@@ -185,6 +186,50 @@ const im = session?.user?.image || undefined;
          </Link>
         </List>
 
+   
+
+        <ListItems nested>
+            <Toggler 
+              renderToggle={({ open, setOpen }) => (
+                <ListItemButton onClick={() => setOpen(!open)} sx={{paddingLeft:'8px'}}>
+                  <AssignmentRoundedIcon/>
+                  <ListItemContent>
+                    <Typography level="title-sm">Settings</Typography>
+                  </ListItemContent>
+                  <KeyboardArrowDownIcon
+                    sx={{ transform: open ? 'rotate(180deg)' : 'none' }}
+                  />
+                </ListItemButton>
+              )}
+            >
+              <List sx={{ gap: 0.5 }}>
+
+              {['Profile'].map((text, index) => (
+            <Link href={`/employee/settings/${text.toLowerCase()}`} key={text}>
+           
+  
+          
+           <ListItem key={text} disablePadding sx={{ display: 'block',pl:'40px' }}>
+
+            <ListItemText primary={text}  />
+               
+             
+           </ListItem> 
+
+         
+          
+
+      
+           </Link>
+           ))}
+           
+              </List>
+            </Toggler>
+          </ListItems>
+
+
+      
+
         <List
           size="sm"
           sx={{
@@ -196,7 +241,7 @@ const im = session?.user?.image || undefined;
           }}
         >
 
-      {['settings','support'].map((text, index) => (
+      {['Support'].map((text, index) => (
             <Link href={`/employee/${text.toLowerCase()}`} key={text}>
           
            <ListItem key={text} disablePadding sx={{ display: 'block' }}>
@@ -224,6 +269,9 @@ const im = session?.user?.image || undefined;
           </Link>
           ))}
         </List>
+
+
+
       </Box>
 
 

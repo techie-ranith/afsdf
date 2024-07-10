@@ -32,6 +32,7 @@ export const authOptions = {
               secoundemail:'',
               role:'',
               bio:'',
+              fileupload:'',  
 
 
             });
