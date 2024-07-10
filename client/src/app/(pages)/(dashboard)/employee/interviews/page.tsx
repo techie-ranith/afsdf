@@ -1,13 +1,10 @@
-import React from 'react'
-import UpcommingFeature from '@/components/layouts/other/UpcommingFeature'
 
-const page = () => {
+import React from 'react'
+
+export default function page() {
   return (
     <div>
-      <UpcommingFeature></UpcommingFeature>
-      discussinons
+      interview
     </div>
   )
 }
-
-export default page
