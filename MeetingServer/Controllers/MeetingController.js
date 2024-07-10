@@ -1,4 +1,4 @@
-const MeetingModel = require('../Models/');
+const MeetingModel = require('../Models/Meeting');
 const BaseController = require('./BaseController');
 
 class MeetingController extends BaseController {
