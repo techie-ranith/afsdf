@@ -6,11 +6,10 @@ export async function POST(req: any) {
     try {
         
         const { firstname, lastname, role, secoundemail, bio, email } = await req.json();
-        
-       
+        console.log("ewfwe",email);
         await connectDB();
        
-        console.log("ewfwe",email);
+  
       
         const user = await User.findOne({ email });
 
