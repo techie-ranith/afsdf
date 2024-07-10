@@ -57,20 +57,11 @@ function userprofile() {
     const [selectedFile, setSelectedFile] = React.useState(null);
     const [firstname, setFirstname] = React.useState('');
     const [lastname,setLastname]=React.useState('');
-    const [role,setrole]=React.useState('');
+    const [mobile,setMobile]=React.useState('');
     const [bio,setbio]=React.useState('');
-    const [secoundemail,setsecoundemail]=React.useState('');
     const email = session?.user?.email;
 
     
-    const cancel = () => {
-      setFirstname(session?.user?.firstname);
-      setLastname(session?.user?.lastname);
-      setrole(session?.user?.role);
-      setbio(session?.user?.bio);
-      setsecoundemail(session?.user?.secoundemail);
-    }
-  
     
     const hadlesubmit = async (e:any) => {
       e.preventDefault();
@@ -109,9 +100,9 @@ function userprofile() {
         <form onSubmit={hadlesubmit}>
       
         <Box sx={{ mb: 1 }}>
-          <Typography level="title-md">Personal info</Typography>
+          <Typography level="title-md">Contact Customer Support</Typography>
           <Typography level="body-sm">
-            Customize how your profile information will appear to the networks.
+          Describe the problem you’re experiencing so we can assist you effectively.
           </Typography>
         </Box>
         <Divider />
@@ -122,30 +113,9 @@ function userprofile() {
           sx={{ display: { xs: 'none', md: 'flex' }, my: 1 }}
         >
           <Stack direction="column" spacing={1}>
-            <AspectRatio
-              ratio="1"
-              maxHeight={200}
-              sx={{ flex: 1, minWidth: 120, borderRadius: '100%' }}
-            >
-              <img src={session?.user?.image} alt="Profile Picture" />
-            </AspectRatio>
-            <IconButton
-              aria-label="upload new picture"
-              size="sm"
-              variant="outlined"
-              color="neutral"
-              sx={{
-                bgcolor: 'background.body',
-                position: 'absolute',
-                zIndex: 2,
-                borderRadius: '50%',
-                left: 100,
-                top: 170,
-                boxShadow: 'sm',
-              }}
-            >
-              <EditRoundedIcon />
-            </IconButton>
+           
+
+       
           </Stack>
 
           <Stack spacing={2} sx={{ flexGrow: 1 }}>
@@ -160,28 +130,11 @@ function userprofile() {
                 <Input size="sm" value={lastname} placeholder={session?.user?.lastname} onChange={(e) => setLastname(e.target.value)} sx={{ flexGrow: 1 }} />
               </FormControl>
             </Stack>
+
             <Stack direction="row" spacing={2}>
-              <FormControl>
-                <FormLabel>Role</FormLabel>
-                <Input size="sm" value={role} placeholder={session?.user?.role} onChange={(e) => setrole(e.target.value)}   />
-              </FormControl>
-              
-              <FormControl sx={{ flexGrow: 1 }}>
-                <FormLabel>Secoundary Email</FormLabel>
-                <Input
-                  size="sm"
-                  name='secoundemail'
-                  value={secoundemail}
-                  startDecorator={<EmailRoundedIcon />}
-                  placeholder={session?.user?.secoundemail || "Enter your secoundary "}
-                  onChange={(e) => setsecoundemail(e.target.value)} 
-                  sx={{ flexGrow: 1 }}
-                />
-              </FormControl>
-              
-            </Stack>
+
             <FormControl sx={{ flexGrow: 1 }}>
-                 <FormLabel>Current Email</FormLabel>
+                 <FormLabel> Email</FormLabel>
                  <Input
                    name='email'
                    size="sm"
@@ -191,13 +144,28 @@ function userprofile() {
                    disabled
                  />
               </FormControl>
+               
+               <FormControl sx={{ flexGrow: 1 }}>
+                 <FormLabel> Mobile</FormLabel>
+                 <Input
+                   name='mobile'
+                   size="sm"
+                   value={mobile}
+                   sx={{ flexGrow: 1 }}
+                     onChange={(e) => setMobile(e.target.value)}
+                 />
+              </FormControl>
+              
+              
+            </Stack>
+            
           </Stack>
         </Stack>
 
         <Box sx={{ mb: 1 }}>
-          <Typography level="title-md">Bio</Typography>
+          <Typography level="title-md">Issue Details</Typography>
           <Typography level="body-sm">
-            Write a short introduction to be displayed on your profile
+          Please provide a detailed description of the issue you are experiencing.
           </Typography>
         </Box>
         <Divider />
@@ -213,34 +181,13 @@ function userprofile() {
           <FormHelperText sx={{ mt: 0.75, fontSize: 'xs' }}>
             275 characters left
           </FormHelperText>
-        </Stack>
-        <CardOverflow sx={{ borderTop: '1px solid', borderColor: 'divider' }}>
-          <CardActions sx={{ alignSelf: 'flex-end', pt: 2 }}>
-            <Button size="sm" variant="outlined" color="neutral" onClick={cancel}>
-              Cancel
-            </Button>
-            <Button size="sm" variant="solid" type='submit'>
-              Save
-            </Button>
-          </CardActions>
-        </CardOverflow>
 
-          
-
+          <form action="">
       
-  
-         
-          
-      
-    </form>
-
-
-      <form action="">
-      <Divider />
         <Box sx={{ mb: 1 }}>
-            <Typography level="title-md">Your CV</Typography>
+            
             <Typography level="body-sm">
-              Share a few snippets of your work.
+              Add Attachment
             </Typography>
           </Box>
          
@@ -260,10 +207,8 @@ function userprofile() {
           </Box>
       
 
-
-
-
-{selectedFile && (
+    
+   {selectedFile && (
           <CardOverflow sx={{ borderTop: '1px solid', borderColor: 'divider' }}>
           <CardActions sx={{ alignSelf: 'flex-end', pt: 2 }}>
             <Typography>
@@ -278,18 +223,25 @@ function userprofile() {
           </CardActions>
         </CardOverflow>
           
-)}
+   )}
       
       </form>
-        
+         
+        </Stack>        
+      
+        <CardOverflow sx={{ borderTop: '1px solid', borderColor: 'divider' }}>
+          <CardActions sx={{ alignSelf: 'flex-center', pt: 2 }}>
+           
+            <Button size="sm" variant="solid" type='submit'>
+              Send
+            </Button>
+          </CardActions>
+        </CardOverflow>
 
+    </form>    
+        
       </Card>
 
-
-
-
-
-     
       </Stack>
  </Box>
       
