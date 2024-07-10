@@ -1,3 +1,4 @@
+"use client"
 import * as React from 'react';
 import AspectRatio from '@mui/joy/AspectRatio';
 import Box from '@mui/joy/Box';
@@ -29,13 +30,62 @@ import AccessTimeFilledRoundedIcon from '@mui/icons-material/AccessTimeFilledRou
 import VideocamRoundedIcon from '@mui/icons-material/VideocamRounded';
 import InsertDriveFileRoundedIcon from '@mui/icons-material/InsertDriveFileRounded';
 import EditRoundedIcon from '@mui/icons-material/EditRounded';
+import { useSession } from 'next-auth/react';
+
 
 
 
 export default function MyProfile() {
-  return (
-    <Box sx={{ flex: 1, width: '100%' }}>
-      <Box
+
+  const {data:session} = useSession();
+  const [firstname, setFirstname] = React.useState('');
+  const [lastname,setLastname]=React.useState('');
+  const [role,setrole]=React.useState('');
+  const [bio,setbio]=React.useState('');
+  const [secoundemail,setsecoundemail]=React.useState('');
+  const email = session?.user?.email;
+  const cancel = () => {
+    setFirstname(session?.user?.firstname);
+    setLastname(session?.user?.lastname);
+    setrole(session?.user?.role);
+    setbio(session?.user?.bio);
+    setsecoundemail(session?.user?.secoundemail);
+  }
+
+  
+  const hadlesubmit = async (e:any) => {
+    e.preventDefault();
+    console.log('submitted');
+
+
+
+    
+    try{
+      const res= await fetch ('/api/updateprofile', {	
+         method: 'POST',
+         headers: {
+           'Content-Type': 'application/json',
+         },
+         body: JSON.stringify({firstname, lastname,role,secoundemail,bio ,email}),
+       }
+       );
+        const data = await res.json();
+        console.log(data);
+        if (res.ok){
+          alert('Profile updated');
+        }
+    
+     }catch (error){
+   
+       console.log('An error occured',error);
+       alert('An error occured');
+     }
+   
+  }
+
+
+  return (<>
+  <Box
         sx={{
           position: 'sticky',
           top: { sm: -100, md: -110 },
@@ -65,20 +115,22 @@ export default function MyProfile() {
               fontSize={12}
               fontWeight={500}
             >
-              Users
+             Settings
             </Link>
             <Typography color="primary" fontWeight={500} fontSize={12}>
-              My profile
+             profile
             </Typography>
           </Breadcrumbs>
           <Typography level="h2" component="h1" sx={{ mt: 1, mb: 2 }}>
-            My profile
+            Company/User  profile
           </Typography>
         </Box>
         
 
 
       </Box>
+    <Box sx={{ flex: 1, width: '100%' ,display: 'flex'}}>
+      
       <Stack
         spacing={4}
         sx={{
@@ -88,239 +140,136 @@ export default function MyProfile() {
           px: { xs: 2, md: 6 },
           py: { xs: 2, md: 3 },
         }}
-      >
-        <Card>
-          <Box sx={{ mb: 1 }}>
-            <Typography level="title-md">Personal info</Typography>
-            <Typography level="body-sm">
-              Customize how your profile information will apper to the networks.
-            </Typography>
-          </Box>
-          <Divider />
-          <Stack
-            direction="row"
-            spacing={3}
-            sx={{ display: { xs: 'none', md: 'flex' }, my: 1 }}
-          >
-            <Stack direction="column" spacing={1}>
-              <AspectRatio
-                ratio="1"
-                maxHeight={200}
-                sx={{ flex: 1, minWidth: 120, borderRadius: '100%' }}
-              >
-                <img
-                  src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=286"
-                  srcSet="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=286&dpr=2 2x"
-                  loading="lazy"
-                  alt=""
-                />
-              </AspectRatio>
-              <IconButton
-                aria-label="upload new picture"
-                size="sm"
-                variant="outlined"
-                color="neutral"
-                sx={{
-                  bgcolor: 'background.body',
-                  position: 'absolute',
-                  zIndex: 2,
-                  borderRadius: '50%',
-                  left: 100,
-                  top: 170,
-                  boxShadow: 'sm',
-                }}
-              >
-                <EditRoundedIcon />
-              </IconButton>
-            </Stack>
-            <Stack spacing={2} sx={{ flexGrow: 1 }}>
-              <Stack spacing={1}>
-                <FormLabel>Name</FormLabel>
-                <FormControl
-                  sx={{ display: { sm: 'flex-column', md: 'flex-row' }, gap: 2 }}
-                >
-                  <Input size="sm" placeholder="First name" />
-                  <Input size="sm" placeholder="Last name" sx={{ flexGrow: 1 }} />
-                </FormControl>
-              </Stack>
-              <Stack direction="row" spacing={2}>
-                <FormControl>
-                  <FormLabel>Role</FormLabel>
-                  <Input size="sm" defaultValue="UI Developer" />
-                </FormControl>
-                <FormControl sx={{ flexGrow: 1 }}>
-                  <FormLabel>Email</FormLabel>
-                  <Input
-                    size="sm"
-                    type="email"
-                    startDecorator={<EmailRoundedIcon />}
-                    placeholder="email"
-                    defaultValue="siriwatk@test.com"
-                    sx={{ flexGrow: 1 }}
-                  />
-                </FormControl>
-              </Stack>
-            
-              <div>
-                <FormControl sx={{ display: { sm: 'contents' } }}>
-                  <FormLabel>Timezone</FormLabel>
-                  <Select
-                    size="sm"
-                    startDecorator={<AccessTimeFilledRoundedIcon />}
-                    defaultValue="1"
-                  >
-                    <Option value="1">
-                      Indochina Time (Bangkok){' '}
-                      <Typography textColor="text.tertiary" ml={0.5}>
-                        — GMT+07:00
-                      </Typography>
-                    </Option>
-                    <Option value="2">
-                      Indochina Time (Ho Chi Minh City){' '}
-                      <Typography textColor="text.tertiary" ml={0.5}>
-                        — GMT+07:00
-                      </Typography>
-                    </Option>
-                  </Select>
-                </FormControl>
-              </div>
-            </Stack>
-          </Stack>
-          <Stack
-            direction="column"
-            spacing={2}
-            sx={{ display: { xs: 'flex', md: 'none' }, my: 1 }}
-          >
-            <Stack direction="row" spacing={2}>
-              <Stack direction="column" spacing={1}>
-                <AspectRatio
-                  ratio="1"
-                  maxHeight={108}
-                  sx={{ flex: 1, minWidth: 108, borderRadius: '100%' }}
-                >
-                  <img
-                    src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=286"
-                    srcSet="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=286&dpr=2 2x"
-                    loading="lazy"
-                    alt=""
-                  />
-                </AspectRatio>
-                <IconButton
-                  aria-label="upload new picture"
-                  size="sm"
-                  variant="outlined"
-                  color="neutral"
-                  sx={{
-                    bgcolor: 'background.body',
-                    position: 'absolute',
-                    zIndex: 2,
-                    borderRadius: '50%',
-                    left: 85,
-                    top: 180,
-                    boxShadow: 'sm',
-                  }}
-                >
-                  <EditRoundedIcon />
-                </IconButton>
-              </Stack>
-              <Stack spacing={1} sx={{ flexGrow: 1 }}>
-                <FormLabel>Name</FormLabel>
-                <FormControl
-                  sx={{
-                    display: {
-                      sm: 'flex-column',
-                      md: 'flex-row',
-                    },
-                    gap: 2,
-                  }}
-                >
-                  <Input size="sm" placeholder="First name" />
-                  <Input size="sm" placeholder="Last name" />
-                </FormControl>
-              </Stack>
-            </Stack>
-            <FormControl>
-              <FormLabel>Role</FormLabel>
-              <Input size="sm" defaultValue="UI Developer" />
-            </FormControl>
-            <FormControl sx={{ flexGrow: 1 }}>
-              <FormLabel>Email</FormLabel>
-              <Input
-                size="sm"
-                type="email"
-                startDecorator={<EmailRoundedIcon />}
-                placeholder="email"
-                defaultValue="siriwatk@test.com"
-                sx={{ flexGrow: 1 }}
-              />
-            </FormControl>
-           
-            <div>
-              <FormControl sx={{ display: { sm: 'contents' } }}>
-                <FormLabel>Timezone</FormLabel>
-                <Select
-                  size="sm"
-                  startDecorator={<AccessTimeFilledRoundedIcon />}
-                  defaultValue="1"
-                >
-                  <Option value="1">
-                    Indochina Time (Bangkok){' '}
-                    <Typography textColor="text.tertiary" ml={0.5}>
-                      — GMT+07:00
-                    </Typography>
-                  </Option>
-                  <Option value="2">
-                    Indochina Time (Ho Chi Minh City){' '}
-                    <Typography textColor="text.tertiary" ml={0.5}>
-                      — GMT+07:00
-                    </Typography>
-                  </Option>
-                </Select>
-              </FormControl>
-            </div>
-          </Stack>
-          <CardOverflow sx={{ borderTop: '1px solid', borderColor: 'divider' }}>
-            <CardActions sx={{ alignSelf: 'flex-end', pt: 2 }}>
-              <Button size="sm" variant="outlined" color="neutral">
-                Cancel
-              </Button>
-              <Button size="sm" variant="solid">
-                Save
-              </Button>
-            </CardActions>
-          </CardOverflow>
-        </Card>
-        <Card>
-          <Box sx={{ mb: 1 }}>
-            <Typography level="title-md">Bio</Typography>
-            <Typography level="body-sm">
-              Write a short introduction to be displayed on your profile
-            </Typography>
-          </Box>
-          <Divider />
-          <Stack spacing={2} sx={{ my: 1 }}>
-           
-            <Textarea
+      > 
+        <form onSubmit={hadlesubmit}>
+      <Card>
+        <Box sx={{ mb: 1 }}>
+          <Typography level="title-md">Personal info</Typography>
+          <Typography level="body-sm">
+            Customize how your profile information will appear to the networks.
+          </Typography>
+        </Box>
+        <Divider />
+
+        <Stack
+          direction="row"
+          spacing={3}
+          sx={{ display: { xs: 'none', md: 'flex' }, my: 1 }}
+        >
+          <Stack direction="column" spacing={1}>
+            <AspectRatio
+              ratio="1"
+              maxHeight={200}
+              sx={{ flex: 1, minWidth: 120, borderRadius: '100%' }}
+            >
+              <img src={session?.user?.image} alt="Profile Picture" />
+            </AspectRatio>
+            <IconButton
+              aria-label="upload new picture"
               size="sm"
-              minRows={4}
-              sx={{ mt: 1.5 }}
-              defaultValue="I'm a software developer based in Bangkok, Thailand. My goal is to solve UI problems with neat CSS without using too much JavaScript."
-            />
-            <FormHelperText sx={{ mt: 0.75, fontSize: 'xs' }}>
-              275 characters left
-            </FormHelperText>
+              variant="outlined"
+              color="neutral"
+              sx={{
+                bgcolor: 'background.body',
+                position: 'absolute',
+                zIndex: 2,
+                borderRadius: '50%',
+                left: 100,
+                top: 170,
+                boxShadow: 'sm',
+              }}
+            >
+              <EditRoundedIcon />
+            </IconButton>
           </Stack>
-          <CardOverflow sx={{ borderTop: '1px solid', borderColor: 'divider' }}>
-            <CardActions sx={{ alignSelf: 'flex-end', pt: 2 }}>
-              <Button size="sm" variant="outlined" color="neutral">
-                Cancel
-              </Button>
-              <Button size="sm" variant="solid">
-                Save
-              </Button>
-            </CardActions>
-          </CardOverflow>
-        </Card>
+
+          <Stack spacing={2} sx={{ flexGrow: 1 }}>
+            <Stack spacing={1}>
+              <FormLabel>Name</FormLabel>
+              <FormControl
+                sx={{ display: { sm: 'flex-column', md: 'flex-row' }, gap: 2 }}
+              >
+               
+              
+                <Input size="sm" value={firstname} placeholder={session?.user?.firstname}   onChange={(e) => setFirstname(e.target.value)} />
+                <Input size="sm" value={lastname} placeholder={session?.user?.lastname} onChange={(e) => setLastname(e.target.value)} sx={{ flexGrow: 1 }} />
+              </FormControl>
+            </Stack>
+            <Stack direction="row" spacing={2}>
+              <FormControl>
+                <FormLabel>Role</FormLabel>
+                <Input size="sm" value={role} placeholder={session?.user?.role} onChange={(e) => setrole(e.target.value)}   />
+              </FormControl>
+              
+              <FormControl sx={{ flexGrow: 1 }}>
+                <FormLabel>Secoundary Email</FormLabel>
+                <Input
+                  size="sm"
+                  name='secoundemail'
+                  value={secoundemail}
+                  startDecorator={<EmailRoundedIcon />}
+                  placeholder={session?.user?.secoundemail || "Enter your secoundary "}
+                  onChange={(e) => setsecoundemail(e.target.value)} 
+                  sx={{ flexGrow: 1 }}
+                />
+              </FormControl>
+              
+            </Stack>
+            <FormControl sx={{ flexGrow: 1 }}>
+                 <FormLabel>Current Email</FormLabel>
+                 <Input
+                   name='email'
+                   size="sm"
+                   startDecorator={<EmailRoundedIcon />}
+                   value={session?.user?.email}
+                   sx={{ flexGrow: 1 }}
+                   disabled
+                 />
+              </FormControl>
+          </Stack>
+        </Stack>
+
+        <Box sx={{ mb: 1 }}>
+          <Typography level="title-md">Bio</Typography>
+          <Typography level="body-sm">
+            Write a short introduction to be displayed on your profile
+          </Typography>
+        </Box>
+        <Divider />
+        <Stack spacing={2} sx={{ my: 1 }}>
+          <Textarea
+            size="sm"
+            value={bio}
+            minRows={4}
+            sx={{ mt: 1.5 }}
+            placeholder={session?.user?.bio}
+            onChange={(e) => setbio(e.target.value)}
+          />
+          <FormHelperText sx={{ mt: 0.75, fontSize: 'xs' }}>
+            275 characters left
+          </FormHelperText>
+        </Stack>
+        <CardOverflow sx={{ borderTop: '1px solid', borderColor: 'divider' }}>
+          <CardActions sx={{ alignSelf: 'flex-end', pt: 2 }}>
+            <Button size="sm" variant="outlined" color="neutral" onClick={cancel}>
+              Cancel
+            </Button>
+            <Button size="sm" variant="solid" type='submit'>
+              Save
+            </Button>
+          </CardActions>
+        </CardOverflow>
+      </Card>
+    </form>
+      
+        
+
+
+
+
+
+
+
         <Card>
           <Box sx={{ mb: 1 }}>
             <Typography level="title-md">Portfolio projects</Typography>
@@ -342,6 +291,179 @@ export default function MyProfile() {
           </CardOverflow>
         </Card>
       </Stack>
+
+{/* anfo */}
+
+
+
+      <Stack
+        spacing={4}
+        sx={{
+          display: 'flex',
+          maxWidth: '800px',
+          mx: 'auto',
+          px: { xs: 2, md: 6 },
+          py: { xs: 2, md: 3 },
+        }}
+      > 
+        <form onSubmit={hadlesubmit}>
+      <Card>
+        <Box sx={{ mb: 1 }}>
+          <Typography level="title-md">Company info</Typography>
+          <Typography level="body-sm">
+            Customize how your profile information will appear to the networks.
+          </Typography>
+        </Box>
+        <Divider />
+
+        <Stack
+          direction="row"
+          spacing={3}
+          sx={{ display: { xs: 'none', md: 'flex' }, my: 1 }}
+        >
+          <Stack direction="column" spacing={1}>
+            <AspectRatio
+              ratio="1"
+              maxHeight={200}
+              sx={{ flex: 1, minWidth: 120, borderRadius: '100%' }}
+            >
+              <img src={session?.user?.image} alt="Profile Picture" />
+            </AspectRatio>
+            <IconButton
+              aria-label="upload new picture"
+              size="sm"
+              variant="outlined"
+              color="neutral"
+              sx={{
+                bgcolor: 'background.body',
+                position: 'absolute',
+                zIndex: 2,
+                borderRadius: '50%',
+                left: 100,
+                top: 170,
+                boxShadow: 'sm',
+              }}
+            >
+              <EditRoundedIcon />
+            </IconButton>
+          </Stack>
+
+          <Stack spacing={2} sx={{ flexGrow: 1 }}>
+            <Stack spacing={1}>
+              <FormLabel>Name</FormLabel>
+              <FormControl
+                sx={{ display: { sm: 'flex-column', md: 'flex-row' }, gap: 2 }}
+              >
+               
+              
+                <Input size="sm" value={firstname} placeholder={session?.user?.firstname}   onChange={(e) => setFirstname(e.target.value)} />
+                <Input size="sm" value={lastname} placeholder={session?.user?.lastname} onChange={(e) => setLastname(e.target.value)} sx={{ flexGrow: 1 }} />
+              </FormControl>
+            </Stack>
+            <Stack direction="row" spacing={2}>
+              <FormControl>
+                <FormLabel>Role</FormLabel>
+                <Input size="sm" value={role} placeholder={session?.user?.role} onChange={(e) => setrole(e.target.value)}   />
+              </FormControl>
+              
+              <FormControl sx={{ flexGrow: 1 }}>
+                <FormLabel>Secoundary Email</FormLabel>
+                <Input
+                  size="sm"
+                  name='secoundemail'
+                  value={secoundemail}
+                  startDecorator={<EmailRoundedIcon />}
+                  placeholder={session?.user?.secoundemail || "Enter your secoundary "}
+                  onChange={(e) => setsecoundemail(e.target.value)} 
+                  sx={{ flexGrow: 1 }}
+                />
+              </FormControl>
+              
+            </Stack>
+            <FormControl sx={{ flexGrow: 1 }}>
+                 <FormLabel>Current Email</FormLabel>
+                 <Input
+                   name='email'
+                   size="sm"
+                   startDecorator={<EmailRoundedIcon />}
+                   value={session?.user?.email}
+                   sx={{ flexGrow: 1 }}
+                   disabled
+                 />
+              </FormControl>
+          </Stack>
+        </Stack>
+
+        <Box sx={{ mb: 1 }}>
+          <Typography level="title-md">Bio</Typography>
+          <Typography level="body-sm">
+            Write a short introduction to be displayed on your profile
+          </Typography>
+        </Box>
+        <Divider />
+        <Stack spacing={2} sx={{ my: 1 }}>
+          <Textarea
+            size="sm"
+            value={bio}
+            minRows={4}
+            sx={{ mt: 1.5 }}
+            placeholder={session?.user?.bio}
+            onChange={(e) => setbio(e.target.value)}
+          />
+          <FormHelperText sx={{ mt: 0.75, fontSize: 'xs' }}>
+            275 characters left
+          </FormHelperText>
+        </Stack>
+        <CardOverflow sx={{ borderTop: '1px solid', borderColor: 'divider' }}>
+          <CardActions sx={{ alignSelf: 'flex-end', pt: 2 }}>
+            <Button size="sm" variant="outlined" color="neutral" onClick={cancel}>
+              Cancel
+            </Button>
+            <Button size="sm" variant="solid" type='submit'>
+              Save
+            </Button>
+          </CardActions>
+        </CardOverflow>
+      </Card>
+    </form>
+      
+        
+
+
+
+
+
+
+
+        <Card>
+          <Box sx={{ mb: 1 }}>
+            <Typography level="title-md">Portfolio projects</Typography>
+            <Typography level="body-sm">
+              Share a few snippets of your work.
+            </Typography>
+          </Box>
+          <Divider />
+      
+          <CardOverflow sx={{ borderTop: '1px solid', borderColor: 'divider' }}>
+            <CardActions sx={{ alignSelf: 'flex-end', pt: 2 }}>
+              <Button size="sm" variant="outlined" color="neutral">
+                Cancel
+              </Button>
+              <Button size="sm" variant="solid">
+                Save
+              </Button>
+            </CardActions>
+          </CardOverflow>
+        </Card>
+      </Stack>
+
+
+
+
+
+
+
     </Box>
+    </>
   );
 }

@@ -11,7 +11,6 @@ export const authOptions = {
     }),
   ],
   callbacks: {
-
     async signIn({ user, account }: { user: any, account: any }) {
       if (account?.provider === "google") {
         console.log("Google sign-in detected");
@@ -20,52 +19,48 @@ export const authOptions = {
         try {
           const existingUser = await User.findOne({ email: user.email });
           console.log("Existing user:", existingUser);
+          
+          const [firstName, ...lastNameArray] = user.name.split(' ');
+          const lastName = lastNameArray.join(' ');
 
           if (!existingUser) {
             const newUser = new User({
-              name: user.name,
+              firstname: firstName,
+              lastname: lastName,
               email: user.email,
               image: user.image,
+              secoundemail:'',
+              role:'',
+              bio:'',
+
+
             });
 
             await newUser.save();
             console.log("New user saved:", newUser);
 
-           
             return true;
-           
           }
 
           console.log("User already exists, skipping save.");
-
           return true;
-         
-        
         } catch (err) {
           console.error("Error saving user:", err);
           return false;
         }
-
-
       }
 
       return true;
     },
-
-    async session({ session, token }: { session: any, token: any }) {
+    async session({ session, token }: any) {
       await connectDB();
-
-      try {
-        if (token) {
-          const dbUser = await User.findById(token.id);
-          if (dbUser) {
-            session.user.id = dbUser._id;
-          }
-        }
-      } catch (error) {
-        console.error("Error fetching user from database:", error);
-      }
-
+      const user = await User.findOne({ email: token.email });
+      session.user.firstname = user.firstname;
+      session.user.lastname = user.lastname;
+      session.user.role = user.role;
+      session.user.bio = user.bio;
+      session.user.secoundemail = user.secoundemail;
+      
       return session;
     },
   },
