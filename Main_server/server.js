@@ -5,7 +5,7 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 const JobRoutes = require('./routes/JobRoutes');
 const OrganizationRoutes = require("./routes/OrganizationRoutes")
-const MeeitngRoutes = require('./routes/MeetingRoutes')
+// const MeeitngRoutes = require('./routes/MeetingRoutes')
 
 dotenv.config();
 const app = express();
@@ -18,7 +18,7 @@ app.use(cors());
 // Routes
 app.use('/api/jobs', JobRoutes);
 app.use('/api/organization',OrganizationRoutes);
-app.use('/api/meetings', MeeitngRoutes);
+// app.use('/api/meetings', MeeitngRoutes);
 app.use('api/jobsearch', JobRoutes);
 
 // Connect to MongoDB
