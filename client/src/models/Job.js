@@ -1,64 +1,24 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+import mongoose from "mongoose";
+
+const { Schema } = mongoose;
 
 const jobSchema = new Schema({
-    title: {
-        type: String,
-        required: true
-    },
-    company: {
-        type: String,
-        required: true
-    },
-    jobDescription: {
-        type: String,
-        required: true
-    },
+    title: { type: String },
+  department: { type: String },
+  employmentType: { type: String },
+  classification: { type: String },
+  skills: [{ type: String }],
+  location: { type: String },
 
-    contractType: {
-        type: String,
-        required: true
-    },
-    location: {
-        type: String,
-        required: true
-    },
-    workingLanguage: {
-        type: String,
-        required: true
-    },
-    jobCategory: {
-        type: String,
-        required: true
-    },
-   
-    skills: {
-        type: [String] 
-    },
-   
-   
-    includeSalary: {
-        type: Boolean,
-        default: true // Assuming it's checked by default
-    },
-    currency: {
-        type: String,
-        enum: ['USD', 'EUR', 'GBP'] // Add more currencies as needed
-    },
-    paidEvery: {
-        type: String,
-        enum: ['Month', 'Week', 'Year'] // Add more options as needed
-    },
-    minSalary: {
-        type: Number,
-        required: true
-    },
-    maxSalary: {
-        type: Number,
-        required: true
-    }
-});
+  includeSalary: { type: String },
+  salaryDetails: {
+    currency: { type: String },
+    paidEvery: { type: String },
+    minSalary: { type: String },
+    maxSalary: { type: String },
+  }
+}, { timestamps: true,collection: "jobs" });
 
-const Job = mongoose.model('Job', jobSchema);
+const Job = mongoose.models.Job || mongoose.model('Job', jobSchema);
 
-module.exports = Job;
+export default Job;

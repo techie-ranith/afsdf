@@ -1,8 +1,11 @@
+// pages/api/auth/[...nextauth].js
+
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import User from "@/models/User";
+import Job from "@/models/Job";
 import { connectDB } from "@/utils/db";
-
+import Organization from "@/models/Organizations";
 export const authOptions = {
   providers: [
     GoogleProvider({
@@ -18,27 +21,56 @@ export const authOptions = {
 
         try {
           const existingUser = await User.findOne({ email: user.email });
-          console.log("Existing user:", existingUser);
-          
-          const [firstName, ...lastNameArray] = user.name.split(' ');
-          const lastName = lastNameArray.join(' ');
 
           if (!existingUser) {
+            const [firstName, ...lastNameArray] = user.name.split(' ');
+            const lastName = lastNameArray.join(' ');
+
+            
+            const newJob = new Job({
+              title: "",
+              department: "",
+              employmentType: "",
+              classification: "",
+              skills: "",
+              location: "",
+              
+              includeSalary: "",
+              salaryDetails: {
+                currency: "",
+                paidEvery: "",
+                minSalary: "",
+                maxSalary:"" ,
+              }
+            });
+
+            await newJob.save();
+            
+            const newOrganization = new Organization({
+              orgName: '',
+              orgType: '',
+              contactEmail: '',
+              contactPhone: '',
+              job: newJob._id,
+            });
+            
+            await newOrganization.save();
+
             const newUser = new User({
               firstname: firstName,
               lastname: lastName,
               email: user.email,
-              image: user.image,
-              secoundemail:'',
-              role:'',
-              bio:'',
-              fileupload:'',  
-
-
+              secoundemail: '',
+              role: '',
+              bio: '',
+              verificationCode:'',
+              fileupload: '',
+              job: newJob._id,
+              company: newOrganization._id,
             });
-
             await newUser.save();
-            console.log("New user saved:", newUser);
+            console.log("User saved successfully.");
+           
 
             return true;
           }
@@ -54,14 +86,22 @@ export const authOptions = {
       return true;
     },
     async session({ session, token }: any) {
-      await connectDB();
-      const user = await User.findOne({ email: token.email });
-      session.user.firstname = user.firstname;
-      session.user.lastname = user.lastname;
-      session.user.role = user.role;
-      session.user.bio = user.bio;
-      session.user.secoundemail = user.secoundemail;
-      
+      try {
+        await connectDB();
+        const user = await User.findOne({ email: token.email });
+
+        if (user) {
+          session.user.firstname = user.firstname;
+          session.user.lastname = user.lastname;
+          session.user.role = user.role ?? '';
+          session.user.bio = user.bio ?? '';
+          session.user.secoundemail = user.secoundemail ?? '';
+          
+        }
+      } catch (err) {
+        console.error("Error fetching user session:", err);
+      }
+
       return session;
     },
   },
