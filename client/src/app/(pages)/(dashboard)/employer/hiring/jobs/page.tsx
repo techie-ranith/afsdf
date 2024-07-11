@@ -1,9 +1,55 @@
 "use client"
 import React, { useState } from 'react';
 import { Button, TextField, FormControl, InputLabel, Select, MenuItem, Grid, Typography, Box } from '@mui/material';
-
+import DataGridDemo from '@/components/DataGrids/datagrid';
+import { DataGrid, GridColDef } from '@mui/x-data-grid';
 
 const JobPostingForm: React.FC = () => {
+
+
+  const columns: GridColDef[] = [
+    { field: 'id', headerName: 'ID', width: 90 },
+    {
+      field: 'Title',
+      headerName: 'Meeting Title',
+      width: 150,
+      editable: true,
+    },
+    {
+      field: 'JobDescription',
+      headerName: 'Meeting Description',
+      width: 150,
+      editable: true,
+    },
+    {
+      field: 'Date',
+      headerName: 'Date',
+      type: 'number',
+      width: 110,
+      editable: true,
+    },
+    {
+      field: 'attendies',
+      headerName: 'attendies',
+      description: 'This column has a value getter and is not sortable.',
+      sortable: false,
+      width: 160,
+      valueGetter: (value, row) => `${row.Title || ''} ${row.JobDescription || ''}`,
+    },
+  ];
+  
+  const rows = [
+    { id: 1, JobDescription: 'Snow', Title: 'Jon', DueDate: 14 },
+    { id: 2, JobDescription: 'Lannister', Title: 'Cersei', DueDate: 31 },
+    { id: 3, JobDescription: 'Lannister', Title: 'Jaime', DueDate: 31 },
+    { id: 4, JobDescription: 'Stark', Title: 'Arya', DueDate: 11 },
+    { id: 5, JobDescription: 'Targaryen', Title: 'Daenerys', DueDate: 23  },
+    { id: 6, JobDescription: 'Melisandre', Title: "Ranith", DueDate: 150 },
+    { id: 7, JobDescription: 'Clifford', Title: 'Ferrara', DueDate: 44 },
+    { id: 8, JobDescription: 'Frances', Title: 'Rossini', DueDate: 36 },
+    { id: 9, JobDescription: 'Roxie', Title: 'Harvey', DueDate: 23 },
+  ];
+  
  
   const [formData, setFormData] = useState({
     company: '',
@@ -198,6 +244,13 @@ const JobPostingForm: React.FC = () => {
         </Grid>
       </Grid>
     </form>
+
+          <div>
+          <DataGrid rows={rows} columns={columns} gridwidth='80%' pageSize={5}/>
+          </div>
+
+
+
     </Box>
     </div>
   );
