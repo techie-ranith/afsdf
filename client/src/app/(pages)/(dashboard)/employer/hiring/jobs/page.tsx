@@ -2,10 +2,10 @@
 import React, { useState } from 'react';
 import { Button, TextField, FormControl, InputLabel, Select, MenuItem, Grid, Typography, Box } from '@mui/material';
 import DataGridDemo from '@/components/DataGrids/datagrid';
+
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 
-const JobPostingForm: React.FC = () => {
-
+const JobPostingForm = () => {
 
   const columns: GridColDef[] = [
     { field: 'id', headerName: 'ID', width: 90 },
@@ -49,6 +49,11 @@ const JobPostingForm: React.FC = () => {
     { id: 8, JobDescription: 'Frances', Title: 'Rossini', DueDate: 36 },
     { id: 9, JobDescription: 'Roxie', Title: 'Harvey', DueDate: 23 },
   ];
+
+
+
+
+
   
  
   const [formData, setFormData] = useState({
@@ -96,6 +101,7 @@ const JobPostingForm: React.FC = () => {
       label: 'Internship',
     },
   ];
+
 
   return (
     <div className='pl-52' >
@@ -245,13 +251,16 @@ const JobPostingForm: React.FC = () => {
       </Grid>
     </form>
 
-          <div>
-          <DataGrid rows={rows} columns={columns} gridwidth='80%' pageSize={5}/>
-          </div>
+   
 
 
 
     </Box>
+    <div className='flex flex-col items-center justify-center flex-1 '>
+        <p>Applied Jobs</p>
+        <DataGrid rows={rows} columns={columns}  pageSize={5}/>
+      
+      </div>
     </div>
   );
 };
