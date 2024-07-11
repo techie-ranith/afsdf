@@ -10,10 +10,10 @@ router.delete('/:id', (req, res) => JobController.deleteSingleJob(req, res));
 router.delete('', (req, res) => JobController.deleteAllJobs(req, res));
 
 
+router.get('/search', (req, res) => JobController.primaryJobSearch(req, res));
 router.get('/primaryjobcard', (req, res) => JobController.primaryJobCard(req, res));
 router.get('/secondaryjobcard', (req, res) => JobController.secondaryJobCard(req, res));
 router.get('/jobdescription', (req, res) => JobController.jobDescription(req, res));
-router.get('/jobsearch', (req, res) => JobController.jobSearch(req, res));
 
 
 
