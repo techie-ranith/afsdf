@@ -26,7 +26,7 @@ const JobCardSection = () => {
       <div>
         <div>Search for Jobs</div>
       </div>
-      <SearchComponent />
+      {/* <SearchComponent /> */}
       <div className='grid grid-cols-3 gap-4'>
         {shuffledCards}
       </div>

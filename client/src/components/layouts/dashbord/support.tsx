@@ -49,7 +49,7 @@ const VisuallyHiddenInput = styled('input')({
     width: 1,
   });
  
-function userprofile() {
+function UserProfile() {
 
 
 
@@ -250,4 +250,4 @@ function userprofile() {
   )
 }
 
-export default userprofile
+export default UserProfile
