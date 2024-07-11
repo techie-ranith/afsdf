@@ -41,6 +41,7 @@ import {signOut} from 'next-auth/react';
 import { useSession } from 'next-auth/react';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import { KeyboardArrowRight } from '@mui/icons-material';
+import Image from 'next/image';
 
 
 
@@ -125,8 +126,8 @@ const im = session?.user?.image || undefined;
      
       <Box sx={{ display: 'flex', gap: 1, alignItems: 'center',justifyContent: "center" }}>
          <Link href={'/'} >
-        <img src="/recruitwise.png" alt="" width={150} />
-        </Link>
+         <Image src="/recruitwise.png" alt="" width={150} height={100} />
+         </Link>
         
        
       </Box>

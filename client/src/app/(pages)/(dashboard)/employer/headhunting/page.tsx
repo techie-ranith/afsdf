@@ -59,7 +59,7 @@ const page = () => {
       <div className='flex flex-col items-center justify-start'>
         {[...Array(6)].map((_, index) => (
             <div key={index} >
-              <JobCardSecondary />
+              <JobCardSecondary logoSrc={''} iconSrc={''} companyName={''} jobTitle={''} location={''} tags={[]} date={''} />
             </div>
           ))}
       </div>

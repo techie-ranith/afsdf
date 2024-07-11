@@ -44,6 +44,7 @@ import { redirect } from 'next/navigation';
 import { useScatterChartProps } from '@mui/x-charts/internals';
 import { useSession,signOut } from 'next-auth/react';
 import { KeyboardArrowRight } from '@mui/icons-material';
+import  Image from 'next/image';
 
 function Toggler({
   defaultExpanded = false,
@@ -122,7 +123,7 @@ const im = session?.user?.image || undefined;
      
       <Box sx={{ display: 'flex', gap: 1, alignItems: 'center' ,justifyContent:"center" }}>
        <Link href={'/'} >
-        <img src="/recruitwise.png" alt="" width={150} />
+        <Image src="/recruitwise.png" alt="" width={150} height={100} />
         </Link>
        
       </Box>
