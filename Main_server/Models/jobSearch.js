@@ -29,6 +29,42 @@ const primaryJobSearchSchema = new Schema({
 
 });
 
+
+const primaryJobCardSchema = new Schema({
+    logo: {
+        type: String,
+        required: true
+    },
+    icon: {
+        type: Boolean,
+        required: true
+    },
+    title: {
+        type: String,
+        required: true
+    },
+    companyname: {
+        type: String,
+        required: true
+    },
+    jobtitle: {
+        type: String,
+        required: true
+    },
+    location: {
+        type: String,
+        required: true
+    },
+    tags: {
+        type: [String]
+    },
+    date: {
+        type: String,
+        required: true
+    }
+
+});
+
 const secondaryJobCardSchema = new Schema({
     logo: {
         type: String,
@@ -51,7 +87,8 @@ const secondaryJobCardSchema = new Schema({
         required: true
     },
     location: {
-
+        type: String,
+        required: true
     },
     tags: {
         type: [String]
@@ -107,9 +144,11 @@ const jobDescriptionSchema = new Schema({
 
 
 const primaryJobSearch = mongoose.model('primaryJobSearch', primaryJobSearchSchema);
+const primaryJobCard = mongoose.model('primaryJobCard', primaryJobCardSchema);
 const secondaryJobCard = mongoose.model('secondaryJobCard', secondaryJobCardSchema);
 const jobDescription = mongoose.model('jobDescription', jobDescriptionSchema);
 
 module.exports = primaryJobSearch;
+module.exports = primaryJobCard;
 module.exports = secondaryJobCard;
 module.exports = jobDescription;

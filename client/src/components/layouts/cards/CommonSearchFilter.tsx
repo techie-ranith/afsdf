@@ -1,12 +1,11 @@
 import React from 'react'
 
-const page = () => {
+const CommonSearchFilter = () => {
   return (
     <div>
-      overview
       
     </div>
   )
 }
 
-export default page
+export default CommonSearchFilter

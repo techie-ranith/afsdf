@@ -31,14 +31,14 @@ import VideocamRoundedIcon from '@mui/icons-material/VideocamRounded';
 import InsertDriveFileRoundedIcon from '@mui/icons-material/InsertDriveFileRounded';
 import EditRoundedIcon from '@mui/icons-material/EditRounded';
 import { useSession } from 'next-auth/react';
+import Image from 'next/image';
 
 
 
 
 
 
-
-function company() {
+function Company() {
     const {data:session} = useSession();
     const [firstname, setFirstname] = React.useState('');
     const [lastname,setLastname]=React.useState('');
@@ -80,8 +80,8 @@ function company() {
               maxHeight={200}
               sx={{ flex: 1, minWidth: 120, borderRadius: '100%' }}
             >
-              <img src={session?.user?.image} alt="Profile Picture" />
-            </AspectRatio>
+              <Image src={session?.user?.image} alt="Profile Picture" height={100} width={100} />
+              </AspectRatio>
             <IconButton
               aria-label="upload new picture"
               size="sm"
@@ -215,4 +215,4 @@ function company() {
   )
 }
 
-export default company
+export default Company

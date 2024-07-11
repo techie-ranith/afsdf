@@ -36,7 +36,7 @@ import Company from '@/components/layouts/profile/company';
 import { styled } from '@mui/material/styles';
 import Buttons from '@mui/material/Button';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
-
+import Image from 'next/image';
 const VisuallyHiddenInput = styled('input')({
     clip: 'rect(0 0 0 0)',
     clipPath: 'inset(50%)',
@@ -49,7 +49,7 @@ const VisuallyHiddenInput = styled('input')({
     width: 1,
   });
  
-function userprofile() {
+function UserProfile() {
 
 
 
@@ -150,7 +150,7 @@ function userprofile() {
               maxHeight={200}
               sx={{ flex: 1, minWidth: 120, borderRadius: '100%' }}
             >
-              <img src={session?.user?.image} alt="Profile Picture" />
+              <Image src={session?.user?.image} alt="Profile Picture" height={100} width={100} />
             </AspectRatio>
             <IconButton
               aria-label="upload new picture"
@@ -321,4 +321,4 @@ function userprofile() {
   )
 }
 
-export default userprofile
+export default UserProfile

@@ -1,3 +1,5 @@
+// Path: pages/jobs.tsx
+
 'use client';
 
 import React, { useState, useEffect } from 'react';
@@ -26,8 +28,17 @@ const Page: React.FC = () => {
 
   const handleSearch = async (params: typeof searchParams) => {
     try {
-      const response = await axios.get('/api/jobsearch/jobsearch', { params });
-      setJobData(response.data);
+      const response = await axios.get('/api/jobsearch', { params });
+      const jobIds = response.data.map((job: { id: string }) => job.id);
+
+      const jobDetailsPromises = jobIds.map((id: string) =>
+        axios.get(`/api/jobSearch/${id}`)
+      );
+
+      const jobDetailsResponses = await Promise.all(jobDetailsPromises);
+      const jobDetails = jobDetailsResponses.map(response => response.data);
+
+      setJobData(jobDetails);
     } catch (error) {
       console.error('Error making search API call:', error);
     }
@@ -36,9 +47,8 @@ const Page: React.FC = () => {
   useEffect(() => {
     const fetchJobs = async () => {
       try {
-        const response = await fetch('/api/jobs');
-        const data = await response.json();
-        setJobData(data);
+        const response = await axios.get('/api/jobs');
+        setJobData(response.data);
         setLoading(false);
       } catch (error) {
         console.error('Error fetching job data:', error);
@@ -50,9 +60,8 @@ const Page: React.FC = () => {
 
   const fetchJobDetails = async (jobId: string) => {
     try {
-      const response = await fetch(`/api/jobSearch${jobId}`);
-      const data = await response.json();
-      setSelectedJob(data);
+      const response = await axios.get(`/api/jobSearch/${jobId}`);
+      setSelectedJob(response.data);
     } catch (error) {
       console.error('Error fetching job details:', error);
     }
@@ -74,8 +83,8 @@ const Page: React.FC = () => {
         handleSearch={handleSearch}
       />
       <div className='flex flex-col justify-center gap-4'>
-        {jobData.map((job, index) => (
-          <div key={index} onClick={() => fetchJobDetails(job.id)}>
+        {jobData.map((job) => (
+          <div key={job.id} onClick={() => fetchJobDetails(job.id)}>
             <JobCardSecondary
               logoSrc={job.logoSrc}
               iconSrc={job.iconSrc}
