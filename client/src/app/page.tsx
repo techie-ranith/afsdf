@@ -18,7 +18,7 @@ const page = () => {
       <Container>
         <div className='flex flex-col items-center justify-center min-w-full gap-14'>
           <Hero />
-          <CommonSearchFilter></CommonSearchFilter>
+          {/* <CommonSearchFilter></CommonSearchFilter> */}
           <JobCardSection></JobCardSection>
           <Features></Features>
           <Testimonials></Testimonials>
