@@ -86,7 +86,7 @@ export default function MyProfile() {
     
 
 
-    <div className=' flex flex-row'>
+    <div className=' '>
 
       <Company/>
       <Userprofile/>

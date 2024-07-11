@@ -33,19 +33,13 @@ import EditRoundedIcon from '@mui/icons-material/EditRounded';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 
-
-
-
-
-
 function Company() {
     const {data:session} = useSession();
-    const [firstname, setFirstname] = React.useState('');
-    const [lastname,setLastname]=React.useState('');
-    const [role,setrole]=React.useState('');
+    const [companyname, setcompnayname] = React.useState('');
+    const [companytype,setcompanytype]=React.useState('');
     const [bio,setbio]=React.useState('');
-    const [secoundemail,setsecoundemail]=React.useState('');
-    const email = session?.user?.email;
+    const [companyemail,setcompanyemail]=React.useState('');
+   
     
   return (
     <div>
@@ -63,9 +57,7 @@ function Company() {
       <Card>
         <Box sx={{ mb: 1 }}>
           <Typography level="title-md">Company info</Typography>
-          <Typography level="body-sm">
-            Customize how your profile information will appear to the networks.
-          </Typography>
+        
         </Box>
         <Divider />
 
@@ -80,7 +72,7 @@ function Company() {
               maxHeight={200}
               sx={{ flex: 1, minWidth: 120, borderRadius: '100%' }}
             >
-              <Image src={session?.user?.image} alt="Profile Picture" height={100} width={100} />
+              <Image src="/logo.png" alt="Profile Picture" height={100} width={100} />
               </AspectRatio>
             <IconButton
               aria-label="upload new picture"
@@ -103,70 +95,54 @@ function Company() {
 
           <Stack spacing={2} sx={{ flexGrow: 1 }}>
             <Stack spacing={1}>
-              <FormLabel>Name</FormLabel>
+              <FormLabel>Company Name</FormLabel>
               <FormControl
                 sx={{ display: { sm: 'flex-column', md: 'flex-row' }, gap: 2 }}
               >
-               
-              
-                <Input size="sm" value={firstname} placeholder={session?.user?.firstname}   onChange={(e) => setFirstname(e.target.value)} />
-                <Input size="sm" value={lastname} placeholder={session?.user?.lastname} onChange={(e) => setLastname(e.target.value)} sx={{ flexGrow: 1 }} />
+                <Input size="sm" value={companyname}  placeholder={session?.organization?.orgName || "Enter Company Name"}  onChange={(e) => setcompnayname(e.target.value)} />
               </FormControl>
             </Stack>
             <Stack direction="row" spacing={2}>
               <FormControl>
-                <FormLabel>Role</FormLabel>
-                <Input size="sm" value={role} placeholder={session?.user?.role} onChange={(e) => setrole(e.target.value)}   />
+                <FormLabel>Company Type</FormLabel>
+                <Input size="sm" value={companytype} placeholder={session?.organization?.orgType || "Enter Company Type"} onChange={(e) => setcompanytype(e.target.value)}   />
               </FormControl>
               
               <FormControl sx={{ flexGrow: 1 }}>
-                <FormLabel>Secoundary Email</FormLabel>
+                <FormLabel>Company  Email</FormLabel>
                 <Input
                   size="sm"
                   name='secoundemail'
-                  value={secoundemail}
+                  value={companyemail}
                   startDecorator={<EmailRoundedIcon />}
-                  placeholder={session?.user?.secoundemail || "Enter your secoundary "}
-                  onChange={(e) => setsecoundemail(e.target.value)} 
+                  placeholder={session?.organization?.contactEmail || "Enter your Comapny Email "}
+                  onChange={(e) => setcompanyemail(e.target.value)} 
                   sx={{ flexGrow: 1 }}
                 />
               </FormControl>
               
+              
             </Stack>
-            <FormControl sx={{ flexGrow: 1 }}>
-                 <FormLabel>Current Email</FormLabel>
-                 <Input
-                   name='email'
-                   size="sm"
-                   startDecorator={<EmailRoundedIcon />}
-                   value={session?.user?.email}
-                   sx={{ flexGrow: 1 }}
-                   disabled
-                 />
+
+             <FormControl>
+                <FormLabel>Company Address</FormLabel>
+                <Input size="sm" value={companytype} placeholder={session?.organization?.orgType || "Enter Company Type"} onChange={(e) => setcompanytype(e.target.value)}   />
               </FormControl>
+
+              <FormControl>
+                <FormLabel>Company Industry</FormLabel>
+                <Input size="sm" value={companytype} placeholder={session?.organization?.orgType || "Enter Company Type"} onChange={(e) => setcompanytype(e.target.value)}   />
+              </FormControl>
+              <FormControl>
+                <FormLabel>Contact phone number</FormLabel>
+                <Input size="sm" value={companytype} placeholder={session?.organization?.orgType || "Enter Company Type"} onChange={(e) => setcompanytype(e.target.value)}   />
+              </FormControl>
+          
           </Stack>
         </Stack>
 
-        <Box sx={{ mb: 1 }}>
-          <Typography level="title-md">Bio</Typography>
-          <Typography level="body-sm">
-            Write a short introduction to be displayed on your profile
-          </Typography>
-        </Box>
-        <Divider />
-        <Stack spacing={2} sx={{ my: 1 }}>
-          <Textarea
-            size="sm"
-            value={bio}
-            minRows={4}
-            sx={{ mt: 1.5 }}
-            placeholder={session?.user?.bio}
-            onChange={(e) => setbio(e.target.value)}
-          />
-          <FormHelperText sx={{ mt: 0.75, fontSize: 'xs' }}>
-            275 characters left
-          </FormHelperText>
-        </Stack>
+  
+   
         <CardOverflow sx={{ borderTop: '1px solid', borderColor: 'divider' }}>
           <CardActions sx={{ alignSelf: 'flex-end', pt: 2 }}>
             <Button size="sm" variant="outlined" color="neutral" >
@@ -188,26 +164,6 @@ function Company() {
 
 
 
-        <Card>
-          <Box sx={{ mb: 1 }}>
-            <Typography level="title-md">Portfolio projects</Typography>
-            <Typography level="body-sm">
-              Share a few snippets of your work.
-            </Typography>
-          </Box>
-          <Divider />
-      
-          <CardOverflow sx={{ borderTop: '1px solid', borderColor: 'divider' }}>
-            <CardActions sx={{ alignSelf: 'flex-end', pt: 2 }}>
-              <Button size="sm" variant="outlined" color="neutral">
-                Cancel
-              </Button>
-              <Button size="sm" variant="solid">
-                Save
-              </Button>
-            </CardActions>
-          </CardOverflow>
-        </Card>
       </Stack>
 
       

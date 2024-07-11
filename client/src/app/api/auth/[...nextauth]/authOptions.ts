@@ -103,7 +103,24 @@ export const authOptions: NextAuthOptions = {
         session.user.role = user.role;
         session.user.bio = user.bio;
         session.user.secoundemail = user.secoundemail;
+        const organization = await Organization.findOne({ _id: user.organizationref });
+        if (organization) {
+          session.organization = {
+            orgName: organization.orgName,
+            orgType: organization.orgType,
+            industry: organization.industry,
+            address: organization.address,
+            contactEmail: organization.contactEmail,
+            contactPhone: organization.contactPhone,
+           
+          };
+            
+          
+        }
+
+    
       }
+     
       return session;
     },
   },
