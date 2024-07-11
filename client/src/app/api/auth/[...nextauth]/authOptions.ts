@@ -3,7 +3,8 @@ import { NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import User from "@/models/User";
 import { connectDB } from "@/utils/db";
-
+import Organization from "@/models/Organization";
+import Job from "@/models/Job";
 export const authOptions: NextAuthOptions = {
   providers: [
     GoogleProvider({
@@ -21,27 +22,68 @@ export const authOptions: NextAuthOptions = {
           const existingUser = await User.findOne({ email: user.email });
           console.log("Existing user:", existingUser);
           
-          const [firstName, ...lastNameArray] = user.name.split(' ');
-          const lastName = lastNameArray.join(' ');
-
           if (!existingUser) {
+            const [firstName, ...lastNameArray] = user.name.split(' ');
+            const lastName = lastNameArray.join(' ');
+            const newJob = new Job({
+              title: '',
+              department: '',
+              employmentType: '',
+              classification: '',
+              skills: [''],
+              location: '',
+              includeSalary: '',
+              salaryDetails: {
+                currency: '',
+                paidEvery: '',
+                minSalary: '',
+                maxSalary: '',
+              },
+            });
+            await newJob.save();
+
+            const newOrg = new Organization({
+              orgName: 'sssss',
+              orgType: '',
+              industry: '',
+              address: {
+                  street: '',
+                  city: '',
+                  state: '',
+                  postalCode: '',
+                  country: '',
+              },
+              contactEmail: '',
+              contactPhone: '',
+              jobref: newJob._id,
+            });
+        
+            await newOrg.save();
+
+        
+
+
+            console.log("New organization saved:", newOrg);
+        
             const newUser = new User({
               firstname: firstName,
               lastname: lastName,
               email: user.email,
-              image: user.image,
               secoundemail: '',
-              role: '',
+              image: user.image,
               bio: '',
+              role: '',
+              verificationCode: null,
               fileupload: '',  
+              organizationref: newOrg._id,
             });
-
+        
             await newUser.save();
             console.log("New user saved:", newUser);
-
+        
             return true;
           }
-
+        
           console.log("User already exists, skipping save.");
           return true;
         } catch (err) {
