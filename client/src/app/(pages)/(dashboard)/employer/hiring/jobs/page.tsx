@@ -258,7 +258,7 @@ const JobPostingForm = () => {
     </Box>
     <div className='flex flex-col items-center justify-center flex-1 '>
         <p>Applied Jobs</p>
-        <DataGrid rows={rows} columns={columns}  pageSize={5}/>
+        <DataGrid rows={rows} columns={columns} gridwidth='80%' pageSize={5}/>
       
       </div>
     </div>
