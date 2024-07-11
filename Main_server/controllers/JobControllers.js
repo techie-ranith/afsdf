@@ -1,5 +1,5 @@
 const JobModel = require('../Models/Job');
-const {primaryJobSearch, secondaryJobCard, jobDescription} = require('../Models/jobSearch');
+const {primaryJobCard, secondaryJobCard, jobDescription} = require('../Models/jobSearch');
 const BaseController = require('./BaseController');
 
 class JobController extends BaseController {
@@ -60,11 +60,9 @@ class JobController extends BaseController {
         await this.getSingleItem(id, res);
     }
     async primaryJobSearch(req, res) {
-        const id = req.params.id;
-            data = await JobModel.jobSchema.find(req.query)
-        await this.getSingleItem(id, res);
+        const data = await JobModel.jobSchema.find(req.query)
+        res.json(data);
     }
-
 }
 
 module.exports = new JobController();
