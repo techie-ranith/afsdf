@@ -8,7 +8,7 @@ import zoom from '../../../../../../public/zoom.png'
 import FormControl from '@mui/material/FormControl';
 import { TextField } from '@mui/material';
 import Button from '@/components/Buttons/Buttons';
-
+import KanbanBoard from '@/components/layouts/kanban/KanbanBoard';
 const columns: GridColDef[] = [
   { field: 'id', headerName: 'ID', width: 90 },
   {
@@ -53,7 +53,11 @@ const rows = [
 ];
 
 const Hiring = () => {
-  return (
+  return ( 
+    <div>
+
+   
+
     <div className='flex items-start justify-around p-10 gap-4'>
       <div className='flex items-center justify-between flex-col gap-10'>
         <div className='flex items-center flex-col justify-center border-0 shadow-xl rounded-xl p-6'>
@@ -87,7 +91,13 @@ const Hiring = () => {
       <div className='flex flex-col gap-8 items-center justify-center'>
             <DataGrid rows={rows} columns={columns} gridwidth='100%' pageSize={10}/>
       </div>
+
+     
     </div>
+    <KanbanBoard/>
+    </div>
+
+    
   );
 }
 
