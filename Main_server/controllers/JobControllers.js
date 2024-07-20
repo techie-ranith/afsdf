@@ -69,6 +69,15 @@ class JobController extends BaseController {
         const data = await JobModel.find(req.query)
         res.json(data);
     }
+
+    async jobSearch(req, res) {
+        const id = req.params.id;
+        if (!this.validateId(id, res)) {
+            return;
+        }
+        await this.getSingleItem(id, res);
+    }
+
 }
 
 module.exports = new JobController();
