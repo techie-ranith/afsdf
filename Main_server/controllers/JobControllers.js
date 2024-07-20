@@ -1,6 +1,7 @@
 const JobModel = require('../Models/Job');
 const {primaryJobCard, secondaryJobCard, jobDescription} = require('../Models/jobSearch');
 const BaseController = require('./BaseController');
+const { validationResult, query } = require('express-validator');
 
 class JobController extends BaseController {
     constructor() {
@@ -45,6 +46,11 @@ class JobController extends BaseController {
         await this.deleteAllItems(req, res);
     }
 
+    async primaryJobCard(req, res) {
+        const data = await JobModel.jobSchema.find(req.query)
+        res.json(data);
+    }
+
     async secondaryJobCard(req, res) {
         const id = req.params.id;
         if (!this.validateId(id, res)) {
@@ -60,7 +66,7 @@ class JobController extends BaseController {
         await this.getSingleItem(id, res);
     }
     async primaryJobSearch(req, res) {
-        const data = await JobModel.jobSchema.find(req.query)
+        const data = await JobModel.find(req.query)
         res.json(data);
     }
 }
