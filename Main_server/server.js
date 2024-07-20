@@ -4,9 +4,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const JobRoutes = require('./routes/JobRoutes');
-const JobSearch = require('./routes/Jobsearch');
 const OrganizationRoutes = require("./routes/OrganizationRoutes")
-// const MeeitngRoutes = require('./routes/MeetingRoutes')
 
 dotenv.config();
 const app = express();
@@ -16,14 +14,10 @@ const port = process.env.PORT || 8080;
 app.use(express.json());
 app.use(cors());
 
-// Routes
-app.use('/api/jobs', JobRoutes);
+app.use('/api/jobs/jobsearch', JobRoutes);
 app.use('/api/organization',OrganizationRoutes);
-// app.use('/api/meetings', MeeitngRoutes);
 
-app.use('api/jobsearch/', JobRoutes);
 
-// Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI)
 .then(() => {
   app.listen(port, () => {
