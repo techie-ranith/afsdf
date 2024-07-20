@@ -20,8 +20,8 @@ app.use(cors());
 app.use('/api/jobs', JobRoutes);
 app.use('/api/organization',OrganizationRoutes);
 // app.use('/api/meetings', MeeitngRoutes);
-app.use('/api/jobsearch', JobSearch);
 
+app.use('api/jobsearch/', JobRoutes);
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI)
