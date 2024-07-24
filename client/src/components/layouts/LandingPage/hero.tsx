@@ -10,6 +10,7 @@ import FormLabel from '@mui/joy/FormLabel';
 import Input from '@mui/joy/Input';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
+import CustomButton from "@/components/Buttons/Buttons"
 
 const Hero = () => {
   const [email, setEmail] = React.useState('');
@@ -266,25 +267,9 @@ const Hero = () => {
                     </span>
                   </div>
                   <div>
-                    <Button
-                      sx={{
-                        backgroundColor: '#2421C4',
-                        color: 'white',
-                        borderRadius: '15px',
-                        width: '154px',
-                        height: '55px',
-                        '&:hover': {
-                          borderColor: 'blue',
-                          color: 'white',
-                          backgroundColor: '#303f9f',
-                        },
-                        fontSize: '17px',
-                        fontWeight: 'bold',
-                      }}
-                      type="submit"
-                    >
+                    <CustomButton size={"large"} variant={"primary_2"} className='bg-primary-800' type="submit">
                       Sign In
-                    </Button>
+                    </CustomButton>
                   </div>
                   <span className='font-space-mono font-bold'>
                     New to RECRUITWISE?{' '}
