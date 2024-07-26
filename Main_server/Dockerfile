@@ -1,14 +1,14 @@
 # Use a base image with Node.js
-FROM node:latest
+FROM node:alpine
 
 # Set working directory
-WORKDIR /
+WORKDIR ./
 
-# Copy package.json and yarn.lock to the working directory
-COPY package.json yarn.lock ./
+# Copy package.json and package-lock.json to the working directory
+COPY package.json package-lock.json ./
 
 # Install dependencies
-RUN yarn install
+RUN npm install
 
 # Copy the rest of the application code
 COPY . .
@@ -17,4 +17,4 @@ COPY . .
 EXPOSE 4000
 
 # Command to run the application
-CMD ["node", "start"]
+CMD ["npm", "start"]
