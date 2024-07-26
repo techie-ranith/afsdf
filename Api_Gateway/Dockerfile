@@ -1,8 +1,8 @@
 # Use the official Node.js image from the Docker Hub
-FROM node:16
+FROM node:alpine
 
 # Create and set the working directory
-WORKDIR /usr/src/app
+WORKDIR ./
 
 # Copy package.json and package-lock.json files to the working directory
 COPY package*.json ./
@@ -14,7 +14,7 @@ RUN npm install
 COPY . .
 
 # Expose the port that the API Gateway will run on
-EXPOSE 3000
+EXPOSE 8000
 
 # Define the command to run the API Gateway
 CMD [ "node", "index.js" ]

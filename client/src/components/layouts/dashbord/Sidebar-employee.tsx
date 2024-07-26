@@ -126,7 +126,7 @@ const im = session?.user?.image || undefined;
      
       <Box sx={{ display: 'flex', gap: 1, alignItems: 'center',justifyContent: "center" }}>
          <Link href={'/'} >
-         <Image src="/recruitwise.png" alt="" width={150} height={100} />
+         <Image src="/recruitwise.png" alt="" width={30} height={100} />
          </Link>
         
        

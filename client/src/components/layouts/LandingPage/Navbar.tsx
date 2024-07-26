@@ -21,7 +21,7 @@ const Navbar = () => {
   const im = session?.user?.image || undefined;
   return (
     <div className='flex items-center justify-between w-full py-2 px-10 border-primary-200'>
-      <Link href="/">  <Image src={logo} alt='logo' width={160} className='border-0 rounded-xl'></Image></Link>
+      <Link href="/">  <Image src={logo} alt='logo' width={35} className='border-0 rounded-xl'></Image></Link>
         <div className='flex items-center justify-center gap-16'>
 
         <Link href="/">
@@ -71,13 +71,8 @@ const Navbar = () => {
                         size='lg'
                         src={im}
                         alt="Profile Picture"
-                      />
-                         
-                                  
+                      />          
                   </Box>
-                  
-
-
                  </>
         )}
 

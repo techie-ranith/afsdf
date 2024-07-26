@@ -1,16 +1,60 @@
-version: '3'
+version: '3.8'
+
 services:
-  frontend:
-    build: ./client
+
+  client:
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
-      - '80:80'
-  backend:
-    build: ./server
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - .:/usr/src/app
+
+  meetingserver:
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
-      - '3000:3000'
-    depends_on:
-      - database
-  database:
-    image: mongo
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - .:/usr/src/app
+
+  main_server:
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
-      - '27017:27017'
+      - "4000:4000"
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - .:/usr/src/app
+    command: node --max-old-space-size=4096 server.js
+
+  job_suggestion_server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "4000:4000"
+    environment:
+      - PYTHON_ENV=production
+    volumes:
+      - .:/usr/src/app
+
+  candidate_suggestion_server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "4000:4000"
+    environment:
+      - PYTHON_ENV=production
+    volumes:
+      - .:/usr/src/app
+

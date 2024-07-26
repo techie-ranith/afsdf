@@ -1,45 +1,65 @@
 const express = require('express');
 const { createProxyMiddleware } = require('http-proxy-middleware');
 
+
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8000;
 
 // Configuration of the services
-const serviceOneURL = 'http://localhost:3001';
-const serviceTwoURL = 'http://localhost:3002';
-const serviceThreeURL = 'http://localhost:5000';
-const serviceFourURL = 'http://localhost:5001';
+const api_gateway_url = 'http://localhost:8000';
+const client = 'http://localhost:3000';
+const Meeting_server_URL = 'http://localhost:3001';
+const Main_serverURL = 'http://localhost:4000';
+const candidate_suggestion_serverURL = 'http://localhost:8001';
+const job_suggestion_serverURL = 'http://localhost:8002';
+
+app.use('/api_gateway_url', createProxyMiddleware({
+  target: api_gateway_url,
+  changeOrigin: true,
+  pathRewrite: {
+    '^/client': '', 
+  },
+}));
 
 // Proxy routes
-app.use('/service-one', createProxyMiddleware({
-  target: serviceOneURL,
+app.use('/client', createProxyMiddleware({
+  target: client,
   changeOrigin: true,
   pathRewrite: {
-    '^/service-one': '', 
+    '^/client': '', 
   },
 }));
 
-app.use('/service-two', createProxyMiddleware({
-  target: serviceTwoURL,
+app.use('/Meeting_server', createProxyMiddleware({
+  target: Meeting_server_URL,
   changeOrigin: true,
   pathRewrite: {
-    '^/service-two': '', 
+    '^/candidate_suggestion_server': '', 
   },
 }));
 
-app.use('/service-three', createProxyMiddleware({
-  target: serviceThreeURL,
+app.use('/Main_server', createProxyMiddleware({
+  target: Main_serverURL,
   changeOrigin: true,
   pathRewrite: {
-    '^/service-three': '', 
+    '^/Main_server': '', 
   },
 }));
+
+app.use('/candidate_suggestion_server-four', createProxyMiddleware({
+  target: candidate_suggestion_serverURL,
+  changeOrigin: true,
+  pathRewrite: {
+    '^/job_suggestion_server': '', 
+  },
+}));
+
 
 app.use('/service-four', createProxyMiddleware({
-  target: serviceFourURL,
+  target: job_suggestion_serverURL,
   changeOrigin: true,
   pathRewrite: {
-    '^/service-four': '', 
+    '^/job_suggestion_server': '', 
   },
 }));
 
@@ -47,3 +67,4 @@ app.use('/service-four', createProxyMiddleware({
 app.listen(PORT, () => {
   console.log(`API Gateway is running on port ${PORT}`);
 });
+
