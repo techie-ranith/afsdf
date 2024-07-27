@@ -14,8 +14,9 @@ const port = process.env.PORT || 8080;
 app.use(express.json());
 app.use(cors());
 
-app.use('/api/jobs/jobsearch', JobRoutes);
 app.use('/api/organization',OrganizationRoutes);
+app.use('/api/jobs',JobRoutes)
+
 
 
 mongoose.connect(process.env.MONGO_URI)
