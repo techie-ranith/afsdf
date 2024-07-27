@@ -4,6 +4,7 @@ FROM node:alpine
 # Create and set the working directory
 WORKDIR ./
 
+
 # Copy package.json and package-lock.json files to the working directory
 COPY package*.json ./
 
@@ -15,6 +16,7 @@ COPY . .
 
 # Expose the port that the API Gateway will run on
 EXPOSE 8000
+
 
 # Define the command to run the API Gateway
 CMD [ "node", "index.js" ]
