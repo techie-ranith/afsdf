@@ -509,7 +509,7 @@ const Hero = () => {
         </div>
       </div>
       <div>
-        <Image src={HeroImage} alt='Hero Image' width={600}/>
+        <Image src={HeroImage} alt='Hero Image' width={600} />
       </div>
     </div>
   );
