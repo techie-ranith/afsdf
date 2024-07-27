@@ -261,7 +261,7 @@ const Hero = () => {
                   </FormControl>
                   <div>
                     <span className='font-space-mono font-bold'>
-                      <span className='text-[#2421C4]' onClick={handleForgetPassword}>
+                      <span className='text-secondary-600' onClick={handleForgetPassword}>
                         Forgot Password?
                       </span>
                     </span>
@@ -273,7 +273,7 @@ const Hero = () => {
                   </div>
                   <span className='font-space-mono font-bold'>
                     New to RECRUITWISE?{' '}
-                    <span className='text-[#2421C4]' onClick={handleToggleForm}>
+                    <span className='text-secondary-600' onClick={handleToggleForm}>
                       Sign Up
                     </span>
                   </span>
