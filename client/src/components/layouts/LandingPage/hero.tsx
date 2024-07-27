@@ -177,7 +177,7 @@ const Hero = () => {
   return (
     <div className='flex items-start justify-center gap-40'>
       <div>
-        <div className='text-8xl font-bold'>Your Step into a new career</div>
+        <div className='text-8xl font-bold'>Your Step into a New Career</div>
         <Button
           sx={{
             border: '2px solid black',
