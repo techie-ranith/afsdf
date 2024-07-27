@@ -501,42 +501,15 @@ const Hero = () => {
                     >
                       Change Password
                     </Button>
-                    
                       </div>
-
-
-
-
-
-
-
-
-
-
-
-
                    </FormControl>
-
-
-
                 </form>
-
-
-
-
-
-
-
                 </div>
-
-            
           )}
-
-
         </div>
       </div>
       <div>
-        <Image src={HeroImage} alt='Hero Image' />
+        <Image src={HeroImage} alt='Hero Image' width={600}/>
       </div>
     </div>
   );

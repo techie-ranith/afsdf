@@ -12,21 +12,21 @@ import CommonSearchFilter from '@/components/layouts/cards/CommonSearchFilter';
 
 const page = () => {
   return (
-    <div>
+    <>
       <Survey />
       <Navbar />
       <Container>
-        <div className='flex flex-col items-center justify-center min-w-full gap-14'>
+        <div className='flex flex-col items-center justify-center min-w-full gap-14 mb-10'>
           <Hero />
           {/* <CommonSearchFilter></CommonSearchFilter> */}
           <JobCardSection></JobCardSection>
           <Features></Features>
           <Testimonials></Testimonials>
           <FAQ></FAQ>
-          <Footer></Footer>
         </div>
       </Container>
-    </div>
+      <Footer></Footer>
+    </>
   )
 }
 
