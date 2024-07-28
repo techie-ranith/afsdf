@@ -100,8 +100,9 @@ const MiniDrawer = (props: MiniDrawerProps) => {
           overflow: 'auto',
         }}
       >
-        {props.children}
-     
+        <div className='p-10'>
+          {props.children}
+        </div>
       </Box>
     </Box>
   );

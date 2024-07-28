@@ -55,9 +55,6 @@ const rows = [
 const Hiring = () => {
   return ( 
     <div>
-
-   
-
     <div className='flex items-start justify-around p-10 gap-4'>
       <div className='flex items-center justify-between flex-col gap-10'>
         <div className='flex items-center flex-col justify-center border-0 shadow-xl rounded-xl p-6'>
