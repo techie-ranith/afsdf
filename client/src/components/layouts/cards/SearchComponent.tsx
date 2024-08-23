@@ -1,126 +1,55 @@
-'use client';
+'use client'
+import React, { useState } from 'react';
+import SearchComponent from './CommonSearchFilter';
 
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import ComboBox from "@/components/layouts/other/ComboBox";
-import DropDown from "@/components/layouts/cards/DropDown";
-import Button from '@/components/Buttons/Buttons';
 
-interface Data {
-  jobTitles: { label: string; value: string }[];
-  locations: { label: string; value: string }[];
-  jobTypes: { label: string; value: string }[];
-  modalities: { label: string; value: string }[];
-  countries: { label: string; value: string }[];
-  salaries: { label: string; value: string }[];
-}
-
-interface SearchParams {
-  jobTitle: string;
-  location: string;
-  jobType: string;
-  modality: string;
-  country: string;
-  salary: string;
-}
-
-interface SearchComponentProps {
-  searchParams: SearchParams;
-  setSearchParams: React.Dispatch<React.SetStateAction<SearchParams>>;
-  handleSearch: (params: SearchParams) => void;
-}
-
-const SearchComponent: React.FC<SearchComponentProps> = ({ searchParams, setSearchParams, handleSearch }) => {
-  const [data, setData] = useState<Data>({
-    jobTitles: [],
-    locations: [],
-    jobTypes: [],
-    modalities: [],
-    countries: [],
-    salaries: []
+const App = () => {
+  
+  const [searchParams, setSearchParams] = useState<{
+    jobTitle: string;
+    location: string;
+    jobType: string;
+    modality: string;
+    country: string;
+    salary: string;
+  }>({
+    jobTitle: '',
+    location: '',
+    jobType: '',
+    modality: '',
+    country: '',
+    salary: ''
   });
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get('/api/jobSearch');
-        const formattedData = {
-          jobTitles: response.data.jobTitles.map((item: string) => ({ label: item, value: item })),
-          locations: response.data.locations.map((item: string) => ({ label: item, value: item })),
-          jobTypes: response.data.jobTypes.map((item: string) => ({ label: item, value: item })),
-          modalities: response.data.modalities.map((item: string) => ({ label: item, value: item })),
-          countries: response.data.countries.map((item: string) => ({ label: item, value: item })),
-          salaries: response.data.salaries.map((item: string) => ({ label: item, value: item })),
-        };
-        setData(formattedData);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  const handleComboBoxChange = (key: keyof SearchParams, value: string) => {
-    setSearchParams(prevParams => ({
-      ...prevParams,
-      [key]: value
-    }));
+  const handleSearch = (params: any) => {
+    console.log('Search Params:', params);
   };
 
-  const handleDropdownChange = (key: keyof SearchParams, value: string) => {
-    setSearchParams(prevParams => ({
-      ...prevParams,
-      [key]: value
-    }));
-  };
-
-  const handleSearchClick = () => {
-    handleSearch(searchParams);
-  };
+  const searchFields: {
+    key: keyof typeof searchParams;
+    component: 'ComboBox' | 'DropDown';
+    placeholder?: string;
+    title?: string;
+    apiEndpoint: string;
+  }[] = [
+    { key: 'jobTitle', component: 'ComboBox', placeholder: 'select keywords', apiEndpoint: '/api/jobTitles' },
+    { key: 'location', component: 'ComboBox', placeholder: 'location', apiEndpoint: '/api/locations' },
+    { key: 'jobType', component: 'DropDown', title: 'Job Type', apiEndpoint: '/api/jobTypes' },
+    { key: 'modality', component: 'DropDown', title: 'Modality', apiEndpoint: '/api/modalities' },
+    { key: 'country', component: 'DropDown', title: 'Country', apiEndpoint: '/api/countries' },
+    { key: 'salary', component: 'DropDown', title: 'Salary', apiEndpoint: '/api/salaries' }
+  ];
 
   return (
-    <div className='flex flex-col gap-2 border-2 shadow-lg rounded-md p-4 border-primary-800'>
-      <div className='flex items-center justify-center gap-4'>
-        <ComboBox 
-          data={data.jobTitles} 
-          placeholder='select keywords'
-          onChange={(value: string) => handleComboBoxChange('jobTitle', value)}
-        />
-        <ComboBox 
-          data={data.locations} 
-          placeholder='location'
-          onChange={(value: string) => handleComboBoxChange('location', value)}
-        />
-        <Button variant="primary" size="medium" onClick={handleSearchClick}>Search</Button>
-      </div>
-      <div className='flex items-center justify-between'>
-        <div className='flex items-center justify-start gap-2'>
-          <DropDown 
-            title="Job Type" 
-            items={data.jobTypes} 
-            onChange={(value: string) => handleDropdownChange('jobType', value)}
-          />
-          <DropDown 
-            title="Modality" 
-            items={data.modalities} 
-            onChange={(value: string) => handleDropdownChange('modality', value)}
-          />
-          <DropDown 
-            title="Country" 
-            items={data.countries} 
-            onChange={(value: string) => handleDropdownChange('country', value)}
-          />
-          <DropDown 
-            title="Salary" 
-            items={data.salaries} 
-            onChange={(value: string) => handleDropdownChange('salary', value)}
-          />
-        </div>
-        <Button variant={'primary'} size={'medium'}>Clear Filter</Button>
-      </div>
+    <div>
+      <SearchComponent 
+        searchParams={searchParams} 
+        setSearchParams={setSearchParams} 
+        handleSearch={handleSearch}
+        searchFields={searchFields}
+      />
     </div>
   );
 };
 
-export default SearchComponent;
+export default App;

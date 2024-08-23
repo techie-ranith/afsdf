@@ -1,4 +1,18 @@
 {
+  "name": "server",
+  "version": "1.0.0",
+  "description": "A server application with TypeScript",
+  "main": "dist/server.js",
+  "scripts": {
+    "start": "node --max-old-space-size=4096 server.js",
+    "dev": "nodemon server.js",
+    "build": "tsc",
+    "prebuild": "rimraf dist", 
+    "postbuild": "echo Build completed",
+    "lint": "eslint . --ext .ts",
+    "format": "prettier --write \"src/**/*.{ts,js}\"",
+    "test": "echo \"No tests specified\" && exit 0"
+  },  
   "dependencies": {
     "bcrypt": "^5.1.1",
     "bcryptjs": "^2.4.3",
@@ -12,19 +26,14 @@
     "nodemon": "^3.1.0",
     "ts-node": "^10.9.2"
   },
-  "scripts": {
-    "start": "nodemon server.js"
+  "devDependencies": {
+    "typescript": "^5.4.5",
+    "rimraf": "^5.0.0", 
+    "eslint": "^8.45.0",
+    "prettier": "^3.0.0",
+    "@types/node": "^20.12.7"
   },
-  "name": "server",
-  "version": "1.0.0",
-  "main": "server.js",
-  "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
-  "devDependencies": {
-    "@types/node": "^20.12.7",
-    "supabase": "^1.163.2",
-    "typescript": "^5.4.5"
-  }
+  "keywords": []
 }
